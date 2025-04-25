@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/23 21:17:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/25 00:27:41 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	ft_check_characters(t_gamestate *game)
 	int	i;
 	int	j;
 
-	game->c_collectibles = 0;
-	game->c_exit = 0;
-	game->c_start = 0;
+	game->c.collectibles = 0;
+	game->c.exit = 0;
+	game->c.start = 0;
 	i = -1;
 	while (++i < game->map.width)
 	{
@@ -50,11 +50,11 @@ static void	ft_check_characters(t_gamestate *game)
 		while (++j < game->map.height)
 		{
 			if (game->map.tile[i][j] == 'C')
-				game->c_collectibles++;
+				game->c.collectibles++;
 			else if (game->map.tile[i][j] == 'E')
-				game->c_exit++;
+				game->c.exit++;
 			else if (game->map.tile[i][j] == 'P')
-				game->c_start++;
+				game->c.start++;
 			else if (game->map.tile[i][j] != '1' && game->map.tile[i][j] != '0')
 				ft_exit("Error\nInvalid character in map\n");
 		}
@@ -63,11 +63,11 @@ static void	ft_check_characters(t_gamestate *game)
 
 static void	ft_check_count(t_gamestate *game)
 {
-	if (game->c_collectibles < 1)
+	if (game->c.collectibles < 1)
 		ft_exit("Error\nNo collectibles in map\n");
-	if (game->c_exit != 1)
+	if (game->c.exit != 1)
 		ft_exit("Error\nThere must be exactly one exit\n");
-	if (game->c_start != 1)
+	if (game->c.start != 1)
 		ft_exit("Error\nThere must be exactly one start position\n");
 }
 

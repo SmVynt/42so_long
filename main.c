@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/24 13:32:15 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/25 01:02:30 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	main(int argc, char **argv)
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp,
 			&game.img.size_line, &game.img.endian);
 	ft_createhooks(&game);
+	ft_initialize_images(&game);
+	mlx_put_image_to_window(game.img.mlx, game.img.window,
+		game.textures.bg.srs, 0, 0);
 	mlx_loop(game.img.mlx);
 	ft_exit_error("Error\nMiniLibX looping error.\n");
 	return (0);

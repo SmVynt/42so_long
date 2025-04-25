@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/24 13:48:22 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/25 01:02:18 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 		i++;
 		buffer_size = read(fd, &buffer, 1);
 	}
+}
+
+void	ft_initialize_images(t_gamestate *game)
+{
+	char	*path;
+	int		w;
+	int		h;
+
+	printf("Loading images...\n");
+	path = "./textures/bg_tileset_01.xpm";
+	game->textures.bg.srs = mlx_xpm_file_to_image(game->img.mlx, path, &w, &h);
+	if (!game->textures.bg.srs)
+		ft_exit_error("Error\nCould not load background image\n");
+	game->textures.bg.w = w;
+	game->textures.bg.h = h;
+	printf("Background image loaded\n");
 }
 
 void	ft_initialize(t_gamestate *game, char **argv)
