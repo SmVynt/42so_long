@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/24 13:40:26 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/29 20:05:15 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_exit_game(t_gamestate *game)
 	// mlx_destroy_window()
 	// free(game);
 	exit(0);
-	return(game->steps);
+	return (game->steps);
 }
 
 static void	ft_check_neighbour(t_map *map, int i, int j, char start)

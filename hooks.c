@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/25 03:23:12 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:56:15 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static int	ft_key_press_hook(int keycode, t_gamestate *game)
 
 static int	ft_key_release_hook(int keycode, t_gamestate *game)
 {
-	if (keycode == 53)
-		printf("exit\n");
-	else if (keycode == 0 || keycode == 123)
+	if (keycode == 0 || keycode == 123)
 		printf("left\n");
 	else if (keycode == 2 || keycode == 124)
 		printf("right\n");
@@ -46,9 +44,7 @@ static int	ft_key_release_hook(int keycode, t_gamestate *game)
 
 static int ft_update(t_gamestate *game)
 {
-	// Update game state here
-	// For example, move enemies, check for collisions, etc.
-	(void)game; // To avoid unused parameter warning
+	(void)game;
 	static clock_t curtime = 0;
 	clock_t newtime = clock();
 	double dt = (double)(newtime - curtime) / CLOCKS_PER_SEC ;
@@ -60,9 +56,9 @@ static int ft_update(t_gamestate *game)
 
 void	ft_createhooks(t_gamestate *game)
 {
-	mlx_hook(game->img.window, 2, 1L << 0, ft_key_press_hook, game);
-	mlx_hook(game->img.window, 3, 1L << 1, ft_key_release_hook, game);
-	mlx_hook(game->img.window, 17, 1L << 2, ft_exit_game, game);
-	mlx_loop_hook(game->img.mlx, ft_update, game);
+	mlx_hook(game->window, 2, 1L << 0, ft_key_press_hook, game);
+	mlx_hook(game->window, 3, 1L << 1, ft_key_release_hook, game);
+	mlx_hook(game->window, 17, 1L << 2, ft_exit_game, game);
+	mlx_loop_hook(game->mlx, ft_update, game);
 	// mlx_loop_hook(img->mlx, ft_render, game);
 }
