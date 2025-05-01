@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkmap.c                                         :+:      :+:    :+:   */
+/*   initialize_checkmap.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/29 20:08:04 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/30 03:17:28 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void	ft_check_reach(t_gamestate *game)
 	}
 	map_reach.width = game->map.width;
 	map_reach.height = game->map.height;
-	printf("Map reachability initialized\n");
 	ft_flood_fill(&map_reach, 'P');
 	printf("Map reachability filled\n");
 	j = -1;

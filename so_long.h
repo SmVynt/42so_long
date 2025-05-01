@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/29 20:04:55 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/01 18:58:07 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@
 # define MAX_ENEMIES 10
 # define MAX_WIDTH 80
 # define MAX_HEIGHT 45
-# define SCRN_W 1280
-# define SCRN_H 720
 # define TILE_SIZE 32
+# define SCALE 3
 
 typedef struct s_map
 {
@@ -37,14 +36,14 @@ typedef struct s_map
 
 typedef struct s_texture
 {
-	void	*srs;
+	void	*src;
 	int		w;
 	int		h;
 }	t_texture;
 
 typedef struct s_animation
 {
-	t_texture	*textures;
+	t_texture	textures[10];
 	int			frame_count;
 	int			frame_time;
 	int			cur_frame;
@@ -84,24 +83,25 @@ typedef struct s_count
 
 typedef struct s_imgdata
 {
-	void	*img;
-	char	*addr;
 	int		bpp;
 	int		size_line;
 	int		endian;
-	int		w;
-	int		h;
-
-	void	*bg;
-	void	*characters;
+	char	*data;
 }	t_imgdata;
+
+typedef struct s_render
+{
+	t_texture	bg;
+	t_texture	fg;
+	t_texture	render;
+}	t_render;
 
 typedef struct s_gamestate
 {
 	void		*mlx;
 	void		*window;
+	t_render	img;
 	t_map		map;
-	t_imgdata	img;
 	int			steps;
 	t_enemy		enemies[MAX_ENEMIES];
 	t_hero		hero;
@@ -115,10 +115,27 @@ int		ft_exit_game(t_gamestate *game);
 void	ft_createhooks(t_gamestate *game);
 void	ft_checkinput(int argc, char **argv);
 void	ft_initialize_images(t_gamestate *game);
+void	ft_initialize_texture(t_texture *texture,
+			t_gamestate *game, int w, int h);
 void	ft_initialize(t_gamestate *game, char **argv);
 void	ft_check_map(t_gamestate *game);
 void	ft_flood_fill(t_map *map, char start);
 
 void	ft_next_frame_to_img(void *target, t_animation *anim);
+
+void	ft_scale_image(t_texture *src, t_texture *dst);
+void	ft_scale_image_ca(t_texture *src, t_texture *dst);
+void	ft_override_images(t_texture *dst, t_texture *src, int x, int y);
+void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y);
+void	ft_copy_pixel(char *dst, char *src);
+void	ft_cover_pixel(char *dst, char *src);
+
+t_imgdata	get_img_data(void *img);
+
+int		get_rgba(int r, int g, int b, int a);
+int		get_r(int rgba);
+int		get_g(int rgba);
+int		get_b(int rgba);
+int		get_a(int rgba);
 
 #endif

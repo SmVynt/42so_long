@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/29 20:06:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/30 03:37:20 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,6 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 	}
 }
 
-static void	ft_initialize_image(char *path,
-	t_texture *texture, t_gamestate *game)
-{
-	int	w;
-	int	h;
-
-	printf("Loading %s\n", path);
-	texture->srs = mlx_xpm_file_to_image(game->mlx, path, &w, &h);
-	if (!texture->srs)
-		ft_exit_error("Error\nCould not load that image\n");
-	texture->w = w;
-	texture->h = h;
-	printf("Image loaded\n");
-}
-
-void	ft_initialize_images(t_gamestate *game)
-{
-	ft_initialize_image("./textures/bg_tileset_01.xpm",
-		&game->textures.bg, game);
-}
-
 void	ft_initialize(t_gamestate *game, char **argv)
 {
 	int	fd;
@@ -82,7 +61,5 @@ void	ft_initialize(t_gamestate *game, char **argv)
 	ft_fill_map(game, fd);
 	close(fd);
 	ft_check_map(game);
-	game->img.w = game->map.width * TILE_SIZE;
-	game->img.h = game->map.height * TILE_SIZE;
 	printf("Map created\n");
 }

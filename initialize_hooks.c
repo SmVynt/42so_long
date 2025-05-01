@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   initialize_hooks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/29 18:56:15 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/30 03:35:30 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	ft_key_release_hook(int keycode, t_gamestate *game)
 static int ft_update(t_gamestate *game)
 {
 	(void)game;
-	static clock_t curtime = 0;
-	clock_t newtime = clock();
-	double dt = (double)(newtime - curtime) / CLOCKS_PER_SEC ;
-	double fps = 1.0 / dt;
-	curtime = newtime;
-	printf("%.2f\n", fps);
+	// static clock_t curtime = 0;
+	// clock_t newtime = clock();
+	// double dt = (double)(newtime - curtime) / CLOCKS_PER_SEC ;
+	// double fps = 1.0 / dt;
+	// curtime = newtime;
+	//printf("%.2f\n", fps);
 	return (0);
 }
 

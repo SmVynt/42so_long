@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/04/29 20:04:28 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/01 17:55:07 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,15 @@ CFLAGS = -Wall -Wextra -Werror -I.
 MK = make -C
 #
 SRCS = \
-		checkmap.c \
 		initialize.c \
-		hooks.c \
+		initialize_checkmap.c \
+		initialize_images.c \
+		initialize_hooks.c \
 		render_animation.c \
+		render_images.c \
+		render_scale.c \
 		utils_1.c \
+		utils_colors.c \
 		main.c
 OBJS = $(SRCS:.c=.o)
 #
@@ -63,11 +67,15 @@ bonus: all
 
 norm:
 	norminette	main.c \
-		checkmap.c \
 		initialize.c \
-		hooks.c \
+		initialize_checkmap.c \
+		initialize_images.c \
+		initialize_hooks.c \
 		render_animation.c \
+		render_scale.c \
+		render_images.c \
 		utils_1.c \
+		utils_colors.c \
 		so_long.h 
 
 .PHONY: all clean fclean re bonus norm

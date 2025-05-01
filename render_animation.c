@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/29 20:05:01 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/04/30 03:16:08 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ void	ft_next_frame_to_img(void *target, t_animation *anim)
 		if (anim->cur_frame >= anim->frame_count)
 			anim->cur_frame = 0;
 	}
-	target = anim->textures[anim->cur_frame].srs;
+	target = anim->textures[anim->cur_frame].src;
 }
