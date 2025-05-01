@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 18:58:07 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/01 23:16:51 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_textures
 	t_texture	enemy;
 	t_texture	collectible;
 	t_texture	exit;
+	t_texture	tileset;
+	t_texture	tiles[16];
 }	t_textures;
 
 typedef struct s_enemy
@@ -81,13 +83,13 @@ typedef struct s_count
 	int	enemies;
 }	t_count;
 
-typedef struct s_imgdata
+typedef struct s_imgdt
 {
 	int		bpp;
 	int		size_line;
 	int		endian;
 	char	*data;
-}	t_imgdata;
+}	t_imgdt;
 
 typedef struct s_render
 {
@@ -120,6 +122,7 @@ void	ft_initialize_texture(t_texture *texture,
 void	ft_initialize(t_gamestate *game, char **argv);
 void	ft_check_map(t_gamestate *game);
 void	ft_flood_fill(t_map *map, char start);
+void	ft_fill_tilemap(t_gamestate *game);
 
 void	ft_next_frame_to_img(void *target, t_animation *anim);
 
@@ -130,12 +133,12 @@ void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y);
 void	ft_copy_pixel(char *dst, char *src);
 void	ft_cover_pixel(char *dst, char *src);
 
-t_imgdata	get_img_data(void *img);
-
 int		get_rgba(int r, int g, int b, int a);
 int		get_r(int rgba);
 int		get_g(int rgba);
 int		get_b(int rgba);
 int		get_a(int rgba);
+
+t_imgdt	get_img_data(void *img);
 
 #endif

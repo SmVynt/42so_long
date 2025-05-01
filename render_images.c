@@ -6,18 +6,18 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 18:45:08 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/01 23:17:17 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_imgdata	get_img_data(void *img)
+t_imgdt	get_img_data(void *img)
 {
-	t_imgdata	img_data;
+	t_imgdt	img_data;
 
 	img_data.data = mlx_get_data_addr(img, &img_data.bpp,
-		&img_data.size_line, &img_data.endian);
+			&img_data.size_line, &img_data.endian);
 	return (img_data);
 }
 

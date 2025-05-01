@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 18:49:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/01 21:16:14 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ int	main(int argc, char **argv)
 		game.map.height * TILE_SIZE * SCALE);
 	ft_initialize_texture(&game.img.bg, &game, game.map.width * TILE_SIZE,
 		game.map.height * TILE_SIZE);
-	ft_override_images(&game.img.bg, &game.textures.bg, 0, 0);
-	// mlx_put_image_to_window(game.mlx, game.window,
-	// 	game.img.bg.src, 50, 50);
-	// mlx_put_image_to_window(game.mlx, game.window,
-	// 	game.textures.bg.src, 0, 0);
+	ft_fill_tilemap(&game);
+	//ft_override_images(&game.img.bg, &game.textures.tiles[1], 0, 0);
 	ft_scale_image(&game.img.bg, &game.img.render);
 	mlx_put_image_to_window(game.mlx, game.window,
 		game.img.render.src, 0, 0);
