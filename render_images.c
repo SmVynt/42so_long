@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 23:17:17 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:36:39 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y)
 	char	*src_ptr;
 	char	*dst_ptr;
 
-	src_ptr = (char *)src->src;
-	dst_ptr = (char *)dst->src;
+	src_ptr = get_img_data(src->src).data;
+	dst_ptr = get_img_data(dst->src).data;
 	i = 0;
 	while (i < src->h)
 	{

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/30 03:35:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:42:36 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ static int	ft_key_release_hook(int keycode, t_gamestate *game)
 
 static int ft_update(t_gamestate *game)
 {
-	(void)game;
-	// static clock_t curtime = 0;
-	// clock_t newtime = clock();
-	// double dt = (double)(newtime - curtime) / CLOCKS_PER_SEC ;
-	// double fps = 1.0 / dt;
-	// curtime = newtime;
-	//printf("%.2f\n", fps);
+	ft_next_frame_to_img(&game->img.fg, &game->hero.anim.idle, 64, 18);
+	ft_override_images(&game->img.render_sm, &game->img.bg, 0, 0);
+	ft_cover_images(&game->img.render_sm, &game->img.fg, 0, 0);
+	ft_scale_image_ca(&game->img.render_sm, &game->img.render);
+	mlx_put_image_to_window(game->mlx, game->window,
+		game->img.render.src, 0, 0);
 	return (0);
 }
 

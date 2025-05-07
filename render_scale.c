@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 21:39:46 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/07 04:12:57 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,38 @@ void	ft_copy_pixel(char *dst, char *src)
 	dst[0] = src[0];
 	dst[1] = src[1];
 	dst[2] = src[2];
+	dst[3] = src[3];
+}
+
+// static void	ft_copy_pixel_ca(int x, int y, char *dst, char *src)
+// {
+// 	unsigned char	r;
+// 	unsigned char	g;
+// 	unsigned char	b;
+
+// 	r = (unsigned char)src[0];
+// 	g = (unsigned char)src[1];
+// 	b = (unsigned char)src[2];
+// 	r = r + ((x % 3 == 0) * 2 - 1) * r * (255 - r) / 255;
+// 	g = g + ((x % 3 == 1) * 2 - 1) * g * (255 - g) / 255;
+// 	b = b + ((x % 3 == 2) * 2 - 1) * b * (255 - b) / 255;
+// 	(void)y;
+// 	dst[0] = (char)r;
+// 	dst[1] = (char)g;
+// 	dst[2] = (char)b;
+// 	dst[3] = src[3];
+// }
+
+static void	ft_copy_pixel_ca(int x, int y, char *dst, char *src)
+{
+	int		xr;
+	int		yr;
+
+	xr = x % 3;
+	yr = y % 3;
+	dst[0] = src[0] * (xr != 0);
+	dst[1] = src[1] * (yr != 0);
+	dst[2] = src[2] * (xr != 1);
 	dst[3] = src[3];
 }
 
@@ -64,8 +96,10 @@ void	ft_scale_image_ca(t_texture *src, t_texture *dst)
 		y = 0;
 		while (y < dst->h)
 		{
-			ft_copy_pixel(&dst_ptr[(y * dst->w * 4 + x * 4)],
-				&src_ptr[(y * src->w * 4 + x * 4) / SCALE]);
+			ft_copy_pixel_ca(x, y, &dst_ptr[(y * dst->w * 4 + x * 4)],
+				&src_ptr[(y / SCALE * src->w * 4  + x / SCALE * 4)]);
+			// ft_copy_pixel(&dst_ptr[(y * dst->w * 4 + x * 4)],
+			// 	&src_ptr[(y / SCALE * src->w * 4 + x * 4 / SCALE)]);
 			y++;
 		}
 		x++;

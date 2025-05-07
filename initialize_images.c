@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 23:15:22 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:29:40 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,39 @@ void	ft_initialize_texture(t_texture *texture, t_gamestate *game,
 		ft_exit_error("Error\nCould not create new texture\n");
 }
 
+static void	ft_initialize_animation(char *path,
+	t_texture *texture, t_animation *anim, t_gamestate *game)
+{
+	int i;
+	int fc;
+
+	i = 0;
+	ft_initialize_image(path, &game->textures.temp, game);
+	fc = game->textures.temp.h / game->textures.temp.w;
+	while (i < fc)
+	{
+		ft_initialize_texture(&texture[i], game,
+			game->textures.temp.w, game->textures.temp.w);
+		ft_override_images(&texture[i], &game->textures.temp,
+			0, -(i * game->textures.temp.w));
+		i++;
+	}
+	anim->frame = 0;
+	anim->frame_count = fc;
+	anim->frame_time = FRAME_TIME;
+	anim->delta = FRAME_TIME;
+	anim->src = texture;
+	//mlx_destroy_image(game->mlx, game->textures.temp.src);
+}
+
+
 static void	ft_initialize_tileset(t_gamestate *game)
 {
 	int	i;
 	int	w;
 
 	i = 0;
-	ft_initialize_image("./textures/bg_tileset_01.xpm",
+	ft_initialize_image("./textures/bg_tileset_02.xpm",
 		&game->textures.tileset, game);
 	w = game->textures.tileset.w;
 	while (i < 16)
@@ -87,4 +113,7 @@ void	ft_initialize_images(t_gamestate *game)
 	ft_initialize_image("./textures/bg_tile_01.xpm",
 		&game->textures.bg, game);
 	ft_initialize_tileset(game);
+	ft_initialize_animation("./textures/hero_01.xpm",
+		game->textures.hero_idle, &game->hero.anim.idle, game);
+	printf("Hero idle animation initialized\n");
 }

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 23:16:51 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:39:58 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define MAX_HEIGHT 45
 # define TILE_SIZE 32
 # define SCALE 3
+# define FRAME_TIME 3
+
+# define STATE_IDLE 0
+# define STATE_MOVE 1
+# define STATE_DEATH 2
+# define STATE_DEAD 3
 
 typedef struct s_map
 {
@@ -43,37 +49,76 @@ typedef struct s_texture
 
 typedef struct s_animation
 {
-	t_texture	textures[10];
+	t_texture	*src;
+	int			frame;
 	int			frame_count;
 	int			frame_time;
-	int			cur_frame;
 	int			delta;
 }	t_animation;
+
+typedef struct s_anim_list
+{
+	t_animation *current;
+	t_animation idle;
+	t_animation move;
+	t_animation death;
+} t_anim_list;
 
 typedef struct s_textures
 {
 	t_texture	bg;
-	t_texture	hero;
-	t_texture	enemy;
-	t_texture	collectible;
-	t_texture	exit;
 	t_texture	tileset;
 	t_texture	tiles[16];
+	t_texture	hero_idle[4];
+	t_texture	hero_move[4];
+	t_texture	hero_death[4];
+	t_texture	enemy_idle[4];
+	t_texture	enemy_move[4];
+	t_texture	enemy_death[4];
+	t_texture	coll_idle[4];
+	t_texture	coll_take[4];
+	t_texture	exit_idle[4];
+	t_texture	exit_open[4];
+	t_texture	temp;
 }	t_textures;
-
-typedef struct s_enemy
-{
-	int	x;
-	int	y;
-	int	direction;
-	int	alive;
-}	t_enemy;
 
 typedef struct s_hero
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	int			direction;
+	int			alive;
+	int			state;
+	t_anim_list anim;
 }	t_hero;
+
+typedef struct s_enemy
+{
+	int			x;
+	int			y;
+	int			direction;
+	int			alive;
+	int			state;
+	t_anim_list anim;
+}	t_enemy;
+
+typedef struct s_collectible
+{
+	int			x;
+	int			y;
+	int			active;
+	int			state;
+	t_anim_list anim;
+}	t_collectible;
+
+typedef struct s_exit
+{
+	int			x;
+	int			y;
+	int			active;
+	int			state;
+	t_anim_list anim;
+}	t_exit;
 
 typedef struct s_count
 {
@@ -94,7 +139,9 @@ typedef struct s_imgdt
 typedef struct s_render
 {
 	t_texture	bg;
+	t_texture	decor;
 	t_texture	fg;
+	t_texture	render_sm;
 	t_texture	render;
 }	t_render;
 
@@ -116,15 +163,17 @@ void	ft_exit(char *str);
 int		ft_exit_game(t_gamestate *game);
 void	ft_createhooks(t_gamestate *game);
 void	ft_checkinput(int argc, char **argv);
+
 void	ft_initialize_images(t_gamestate *game);
 void	ft_initialize_texture(t_texture *texture,
 			t_gamestate *game, int w, int h);
 void	ft_initialize(t_gamestate *game, char **argv);
+
 void	ft_check_map(t_gamestate *game);
 void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gamestate *game);
 
-void	ft_next_frame_to_img(void *target, t_animation *anim);
+void	ft_next_frame_to_img(t_texture *target, t_animation *anim, int x, int y);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);
