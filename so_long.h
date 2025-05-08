@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/07 03:39:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 14:37:34 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define STATE_MOVE 1
 # define STATE_DEATH 2
 # define STATE_DEAD 3
+
+# define PATH_TILES "./textures/bg_tileset_02.xpm"
+# define PATH_HERO_IDLE "./textures/hero_01.xpm"
+# define PATH_HERO_MOVE "./textures/hero_run.xpm"
 
 typedef struct s_map
 {

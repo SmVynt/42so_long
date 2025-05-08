@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/07 03:29:40 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 14:43:25 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ static void	ft_initialize_tileset(t_gamestate *game)
 	int	w;
 
 	i = 0;
-	ft_initialize_image("./textures/bg_tileset_02.xpm",
-		&game->textures.tileset, game);
+	ft_initialize_image(PATH_TILES,	&game->textures.tileset, game);
 	w = game->textures.tileset.w;
 	while (i < 16)
 	{
@@ -110,10 +109,8 @@ void	ft_fill_tilemap(t_gamestate *game)
 
 void	ft_initialize_images(t_gamestate *game)
 {
-	ft_initialize_image("./textures/bg_tile_01.xpm",
-		&game->textures.bg, game);
 	ft_initialize_tileset(game);
-	ft_initialize_animation("./textures/hero_01.xpm",
+	ft_initialize_animation(PATH_HERO_IDLE,
 		game->textures.hero_idle, &game->hero.anim.idle, game);
 	printf("Hero idle animation initialized\n");
 }

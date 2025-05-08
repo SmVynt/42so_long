@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/07 03:27:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 14:50:43 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 		ft_exit_error("Error\nCould not initialize MiniLibX\n");
 	game.window = mlx_new_window(game.mlx, game.map.width * SCALE * TILE_SIZE,
 		game.map.height * SCALE * TILE_SIZE, "So Long...");
+
 	//game.img.img = mlx_new_image(game.img.mlx, SCRN_W, SCRN_H);
 	//game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp,
 	//		&game.img.size_line, &game.img.endian);
