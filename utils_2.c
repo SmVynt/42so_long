@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                        :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 14:21:35 by psmolin           #+#    #+#             */
-/*   Updated: 2025/03/10 21:34:13 by psmolin          ###   ########.fr       */
+/*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
+/*   Updated: 2025/05/08 20:24:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-int	ft_atoi(const char *str)
+size_t	ft_strlen(const char *a)
 {
-	long	ret;
-	int		neg;
 	size_t	i;
 
 	i = 0;
-	neg = 1;
-	ret = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+	while (a[i])
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	return (i);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && i < n)
 	{
-		if (str[i] == '-')
-			neg = -1;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		ret = ret * 10 + (str[i] - '0');
-		i++;
-	}
-	return ((int)(ret * neg));
+	if (i != n)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	else
+		return (0);
 }

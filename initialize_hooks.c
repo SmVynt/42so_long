@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 14:47:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:27:02 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static int	ft_key_release_hook(int keycode, t_gamestate *game)
 	return (game->steps);
 }
 
-#include <time.h>
-
-static int ft_update(t_gamestate *game)
+static int	ft_update(t_gamestate *game)
 {
 	ft_next_frame_to_img(&game->img.fg, &game->hero.anim.idle, 64, 18);
 	ft_override_images(&game->img.render_sm, &game->img.bg, 0, 0);
@@ -59,5 +57,4 @@ void	ft_createhooks(t_gamestate *game)
 	mlx_hook(game->window, 3, 1L << 1, ft_key_release_hook, game);
 	mlx_hook(game->window, 17, 1L << 2, ft_exit_game, game);
 	mlx_loop_hook(game->mlx, ft_update, game);
-	// mlx_loop_hook(img->mlx, ft_render, game);
 }

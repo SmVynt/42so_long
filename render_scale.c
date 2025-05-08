@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 14:44:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:25:43 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ void	ft_scale_image_ca(t_texture *src, t_texture *dst)
 		while (y < dst->h)
 		{
 			ft_copy_pixel_ca(x, y, &dst_ptr[(y * dst->w * 4 + x * 4)],
-				&src_ptr[(y / SCALE * src->w * 4  + x / SCALE * 4)]);
-			// ft_copy_pixel(&dst_ptr[(y * dst->w * 4 + x * 4)],
-			// 	&src_ptr[(y / SCALE * src->w * 4 + x * 4 / SCALE)]);
+				&src_ptr[(y / SCALE * src->w * 4 + x / SCALE * 4)]);
 			y++;
 		}
 		x++;

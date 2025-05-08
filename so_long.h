@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 14:37:34 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:27:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include "mlx/mlx.h"
-# include "libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -38,8 +37,8 @@
 
 typedef struct s_map
 {
-	int		width;
-	int		height;
+	int		w;
+	int		h;
 	char	tile[MAX_WIDTH + 1][MAX_HEIGHT + 1];
 	int		checked;
 }	t_map;
@@ -62,11 +61,11 @@ typedef struct s_animation
 
 typedef struct s_anim_list
 {
-	t_animation *current;
-	t_animation idle;
-	t_animation move;
-	t_animation death;
-} t_anim_list;
+	t_animation	*current;
+	t_animation	idle;
+	t_animation	move;
+	t_animation	death;
+}	t_anim_list;
 
 typedef struct s_textures
 {
@@ -93,7 +92,7 @@ typedef struct s_hero
 	int			direction;
 	int			alive;
 	int			state;
-	t_anim_list anim;
+	t_anim_list	anim;
 }	t_hero;
 
 typedef struct s_enemy
@@ -103,7 +102,7 @@ typedef struct s_enemy
 	int			direction;
 	int			alive;
 	int			state;
-	t_anim_list anim;
+	t_anim_list	anim;
 }	t_enemy;
 
 typedef struct s_collectible
@@ -112,7 +111,7 @@ typedef struct s_collectible
 	int			y;
 	int			active;
 	int			state;
-	t_anim_list anim;
+	t_anim_list	anim;
 }	t_collectible;
 
 typedef struct s_exit
@@ -121,7 +120,7 @@ typedef struct s_exit
 	int			y;
 	int			active;
 	int			state;
-	t_anim_list anim;
+	t_anim_list	anim;
 }	t_exit;
 
 typedef struct s_count
@@ -177,7 +176,8 @@ void	ft_check_map(t_gamestate *game);
 void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gamestate *game);
 
-void	ft_next_frame_to_img(t_texture *target, t_animation *anim, int x, int y);
+void	ft_next_frame_to_img(t_texture *target,
+			t_animation *anim, int x, int y);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);
@@ -193,5 +193,8 @@ int		get_b(int rgba);
 int		get_a(int rgba);
 
 t_imgdt	get_img_data(void *img);
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/04/30 03:08:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:30:55 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	ft_flood_fill(t_map *map, char start)
 	{
 		map->checked = 1;
 		i = 0;
-		while (++i < map->width - 1)
+		while (++i < map->w - 1)
 		{
 			j = 0;
-			while (++j < map->height - 1)
+			while (++j < map->h - 1)
 			{
 				if (map->tile[i][j] == start)
 				{

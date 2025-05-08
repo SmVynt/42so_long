@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 15:38:25 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:30:16 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void	ft_fill_tilemap(t_gamestate *game)
 	int	fill;
 
 	y = 0;
-	while (y < game->map.height - 1)
+	while (y < game->map.h - 1)
 	{
 		x = 0;
-		while (x < game->map.width - 1)
+		while (x < game->map.w - 1)
 		{
 			fill = 0;
 			fill += (game->map.tile[x][y] == '1') * 1;
@@ -109,14 +109,14 @@ void	ft_fill_tilemap(t_gamestate *game)
 
 void	ft_initialize_images(t_gamestate *game)
 {
-	ft_initialize_texture(&game->img.render, game, game->map.width * TILE_SIZE * SCALE,
-		game->map.height * TILE_SIZE * SCALE);
-	ft_initialize_texture(&game->img.bg, game, game->map.width * TILE_SIZE,
-		game->map.height * TILE_SIZE);
-	ft_initialize_texture(&game->img.fg, game, game->map.width * TILE_SIZE,
-		game->map.height * TILE_SIZE);
-	ft_initialize_texture(&game->img.render_sm, game, game->map.width * TILE_SIZE,
-		game->map.height * TILE_SIZE);
+	ft_initialize_texture(&game->img.render, game, game->map.w * TILE_SIZE * SCALE,
+		game->map.h * TILE_SIZE * SCALE);
+	ft_initialize_texture(&game->img.bg, game, game->map.w * TILE_SIZE,
+		game->map.h * TILE_SIZE);
+	ft_initialize_texture(&game->img.fg, game, game->map.w * TILE_SIZE,
+		game->map.h * TILE_SIZE);
+	ft_initialize_texture(&game->img.render_sm, game, game->map.w * TILE_SIZE,
+		game->map.h * TILE_SIZE);
 	ft_initialize_tileset(game);
 	ft_initialize_animation(PATH_HERO_MOVE,
 		game->textures.hero_idle, &game->hero.anim.idle, game);

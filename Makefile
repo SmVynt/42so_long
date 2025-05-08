@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/01 17:55:07 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/08 20:21:01 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = \
 		render_images.c \
 		render_scale.c \
 		utils_1.c \
+		utils_2.c \
 		utils_colors.c \
 		main.c
 OBJS = $(SRCS:.c=.o)
@@ -36,9 +37,6 @@ MLX_FOLDER = mlx/
 MLX_LIB = $(MLX_FOLDER)libmlx.a
 MLX_FLAGS = -Lmlx -lmlx -framework openGL -framework AppKit
 #
-LIBFT_FOLDER = libft/
-LIBFT_LIB = $(LIBFT_FOLDER)libft.a
-#
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -46,19 +44,17 @@ all: makeadd $(NAME)
 
 makeadd:
 	$(MK) $(MLX_FOLDER) all
-	$(MK) $(LIBFT_FOLDER) all
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(MLX_LIB) -o $(NAME)
 
 clean:
 	$(MK) $(MLX_FOLDER) clean
-	$(MK) $(LIBFT_FOLDER) clean
 	$(RM) $(OBJS)
 
-fclean: clean
+fclean:
 	$(MK) $(MLX_FOLDER) fclean
-
+	$(RM) $(OBJS)
 	$(RM) $(NAME)
 
 re: fclean all
@@ -75,6 +71,7 @@ norm:
 		render_scale.c \
 		render_images.c \
 		utils_1.c \
+		utils_2.c \
 		utils_colors.c \
 		so_long.h 
 

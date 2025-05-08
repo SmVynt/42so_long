@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 15:36:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:30:33 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		ft_exit_error("Error\nCould not initialize MiniLibX\n");
-	game.window = mlx_new_window(game.mlx, game.map.width * SCALE * TILE_SIZE,
-		game.map.height * SCALE * TILE_SIZE, "So Long...");
+	game.window = mlx_new_window(game.mlx, game.map.w * SCALE * TILE_SIZE,
+		game.map.h * SCALE * TILE_SIZE, "So Long...");
 	ft_createhooks(&game);
 	ft_initialize_images(&game);
 	ft_fill_tilemap(&game);

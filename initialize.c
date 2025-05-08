@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/01 23:14:55 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:28:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 	int		i;
 
 	buffer_size = read(fd, &buffer, 1);
-	game->map.width = 1;
-	game->map.height = 1;
+	game->map.w = 1;
+	game->map.h = 1;
 	i = 0;
 	while (buffer_size > 0)
 	{
-		if (i > MAX_WIDTH || game->map.height > MAX_HEIGHT)
+		if (i > MAX_WIDTH || game->map.h > MAX_HEIGHT)
 			ft_exit("Error\nMap is too large\n");
-		game->map.tile[i][game->map.height - 1] = buffer;
+		game->map.tile[i][game->map.h - 1] = buffer;
 		if (buffer == '\n')
 		{
-			game->map.height++;
-			if (game->map.width == 1)
-				game->map.width = i;
-			else if (i != game->map.width)
+			game->map.h++;
+			if (game->map.w == 1)
+				game->map.w = i;
+			else if (i != game->map.w)
 				ft_exit("Error\nMap is not rectangular\n");
 			i = -1;
 		}
