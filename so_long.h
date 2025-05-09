@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:27:47 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 04:18:39 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define MAX_ENEMIES 10
+# define MAX_ENEMIES 20
+# define MAX_COLLECT 30
 # define MAX_WIDTH 80
 # define MAX_HEIGHT 45
-# define TILE_SIZE 32
+# define TILE_S 32
 # define SCALE 3
-# define FRAME_TIME 3
+# define FRAME_TIME 4
+# define MOVE_SPEED 5
 
 # define STATE_IDLE 0
 # define STATE_MOVE 1
@@ -34,6 +36,13 @@
 # define PATH_TILES "./textures/bg_tileset_02.xpm"
 # define PATH_HERO_IDLE "./textures/hero_01.xpm"
 # define PATH_HERO_MOVE "./textures/hero_run.xpm"
+# define PATH_ERASOR "./textures/erasor.xpm"
+
+typedef struct s_vec
+{
+	int	x;
+	int	y;
+}	t_vec;
 
 typedef struct s_map
 {
@@ -82,6 +91,7 @@ typedef struct s_textures
 	t_texture	coll_take[4];
 	t_texture	exit_idle[4];
 	t_texture	exit_open[4];
+	t_texture	erasor;
 	t_texture	temp;
 }	t_textures;
 
@@ -89,9 +99,15 @@ typedef struct s_hero
 {
 	int			x;
 	int			y;
-	int			direction;
+	int			dir_x;
+	int			dir_y;
+	int			x_dest;
+	int			y_dest;
+	int			wish_x;
+	int			wish_y;
 	int			alive;
 	int			state;
+	int			flipped;
 	t_anim_list	anim;
 }	t_hero;
 
@@ -101,18 +117,20 @@ typedef struct s_enemy
 	int			y;
 	int			direction;
 	int			alive;
+	int			flipped;
 	int			state;
 	t_anim_list	anim;
 }	t_enemy;
 
-typedef struct s_collectible
+typedef struct s_collect
 {
 	int			x;
 	int			y;
 	int			active;
 	int			state;
+	int			flipped;
 	t_anim_list	anim;
-}	t_collectible;
+}	t_collect;
 
 typedef struct s_exit
 {
@@ -156,6 +174,7 @@ typedef struct s_gamestate
 	t_map		map;
 	int			steps;
 	t_enemy		enemies[MAX_ENEMIES];
+	t_collect	collectibles[MAX_ENEMIES];
 	t_hero		hero;
 	t_count		c;
 	t_textures	textures;
@@ -167,22 +186,28 @@ int		ft_exit_game(t_gamestate *game);
 void	ft_createhooks(t_gamestate *game);
 void	ft_checkinput(int argc, char **argv);
 
-void	ft_initialize_images(t_gamestate *game);
-void	ft_initialize_texture(t_texture *texture,
-			t_gamestate *game, int w, int h);
+void	ft_init_image(char *path, t_texture *texture, t_gamestate *game);
+void	ft_init_images(t_gamestate *game);
+void	ft_init_animations(t_gamestate *game);
+void	ft_init_animation(char *path,
+			t_texture *texture, t_animation *anim, t_gamestate *game);
+void	ft_init_tileset(t_gamestate *game);
+void	ft_init_texture(t_texture *texture, t_gamestate *game, int w, int h);
 void	ft_initialize(t_gamestate *game, char **argv);
 
 void	ft_check_map(t_gamestate *game);
 void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gamestate *game);
 
+int		ft_update(t_gamestate *game);
+
 void	ft_next_frame_to_img(t_texture *target,
-			t_animation *anim, int x, int y);
+			t_animation *anim, t_vec v, int f);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);
-void	ft_override_images(t_texture *dst, t_texture *src, int x, int y);
-void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y);
+void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f);
+void	ft_cover_images(t_texture *dst, t_texture *src, t_vec v, int f);
 void	ft_copy_pixel(char *dst, char *src);
 void	ft_cover_pixel(char *dst, char *src);
 
@@ -196,5 +221,6 @@ t_imgdt	get_img_data(void *img);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *a);
+t_vec	mk_vec(int x, int y);
 
 #endif

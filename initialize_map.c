@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_checkmap.c                              :+:      :+:    :+:   */
+/*   initialize_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:29:47 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 03:15:24 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,34 @@ static void	ft_check_reach(t_gamestate *game)
 	}
 }
 
+static void	ft_init_hero(t_gamestate *game)
+{
+	int	i;
+	int	j;
+
+	game->hero.x = 0;
+	game->hero.y = 0;
+	game->hero.wish_x = 0;
+	game->hero.wish_y = 0;
+	game->hero.alive = 1;
+	game->hero.state = STATE_IDLE;
+	game->hero.flipped = 0;
+	i = -1;
+	while (++i < game->map.w)
+	{
+		j = -1;
+		while (++j < game->map.h)
+		{
+			if (game->map.tile[i][j] == 'P')
+			{
+				game->hero.x = i * TILE_S;
+				game->hero.y = j * TILE_S;
+				game->map.tile[i][j] = '0';
+			}
+		}
+	}
+}
+
 void	ft_check_map(t_gamestate *game)
 {
 	if (game->map.w < 3 || game->map.h < 3)
@@ -112,4 +140,7 @@ void	ft_check_map(t_gamestate *game)
 	printf("Map counts checked\n");
 	ft_check_reach(game);
 	printf("Map reachability checked\n");
+	ft_init_hero(game);
+	// ft_init_enemies(game);
+	// ft_init_collectibles(game);
 }

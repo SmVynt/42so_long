@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/07 03:36:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 02:26:38 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	ft_set_pixel(char *dst, int x, int y, int color)
 	dst[3] = get_a(color);
 }
 
-void	ft_override_images(t_texture *dst, t_texture *src, int x, int y)
+void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
 {
 	int		i;
 	int		j;
+	int		jf;
 	char	*src_ptr;
 	char	*dst_ptr;
 
@@ -46,11 +47,12 @@ void	ft_override_images(t_texture *dst, t_texture *src, int x, int y)
 		j = 0;
 		while (j < src->w)
 		{
-			if (x + j >= 0 && x + j < dst->w
-				&& y + i >= 0 && y + i < dst->h)
+			jf = j * (1 - f) + (src->w - j - 1) * f;
+			if (v.x + jf >= 0 && v.x + jf < dst->w
+				&& v.y + i >= 0 && v.y + i < dst->h)
 			{
-				ft_copy_pixel(&dst_ptr[(y + i) * dst->w * 4 + (x + j) * 4],
-					&src_ptr[i * src->w * 4 + j * 4]);
+				ft_copy_pixel(&dst_ptr[(v.y + i) * dst->w * 4 + (v.x + j) * 4],
+					&src_ptr[i * src->w * 4 + jf * 4]);
 			}
 			j++;
 		}
@@ -69,10 +71,11 @@ void	ft_cover_pixel(char *dst, char *src)
 	}
 }
 
-void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y)
+void	ft_cover_images(t_texture *dst, t_texture *src, t_vec v, int f)
 {
 	int		i;
 	int		j;
+	int		jf;
 	char	*src_ptr;
 	char	*dst_ptr;
 
@@ -84,11 +87,12 @@ void	ft_cover_images(t_texture *dst, t_texture *src, int x, int y)
 		j = 0;
 		while (j < src->w)
 		{
-			if (x + j >= 0 && x + j < dst->w
-				&& y + i >= 0 && y + i < dst->h)
+			jf = j * (1 - f) + (src->w - j - 1) * f;
+			if (v.x + jf >= 0 && v.x + jf < dst->w
+				&& v.y + i >= 0 && v.y + i < dst->h)
 			{
-				ft_cover_pixel(&dst_ptr[(y + i) * dst->w * 4 + (x + j) * 4],
-					&src_ptr[i * src->w * 4 + j * 4]);
+				ft_cover_pixel(&dst_ptr[(v.y + i) * dst->w * 4 + (v.x + j) * 4],
+					&src_ptr[i * src->w * 4 + jf * 4]);
 			}
 			j++;
 		}

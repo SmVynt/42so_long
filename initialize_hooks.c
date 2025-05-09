@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:27:02 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 03:12:46 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,53 @@ static int	ft_key_press_hook(int keycode, t_gamestate *game)
 	if (keycode == 53)
 		ft_exit_game(game);
 	else if (keycode == 0 || keycode == 123)
-		printf("LEFT\n");
+	{
+		game->hero.wish_x = -1;
+		//game->hero.anim.current = &game->hero.anim.move;
+		game->hero.flipped = 1;
+	}
 	else if (keycode == 2 || keycode == 124)
-		printf("RIGHT\n");
+	{
+		game->hero.wish_x = 1;
+		//game->hero.anim.current = &game->hero.anim.move;
+		game->hero.flipped = 0;
+	}
 	else if (keycode == 13 || keycode == 126)
-		printf("UP\n");
+	{
+		game->hero.wish_y = -1;
+		game->hero.anim.current = &game->hero.anim.move;
+	}
 	else if (keycode == 1 || keycode == 125)
-		printf("DOWN\n");
+	{
+		game->hero.wish_y = 1;
+		game->hero.anim.current = &game->hero.anim.move;
+	}
 	return (game->steps);
 }
 
 static int	ft_key_release_hook(int keycode, t_gamestate *game)
 {
 	if (keycode == 0 || keycode == 123)
-		printf("left\n");
+	{
+		game->hero.wish_x = 0;
+		game->hero.wish_y = 0;
+	}
 	else if (keycode == 2 || keycode == 124)
-		printf("right\n");
+	{
+		game->hero.wish_x = 0;
+		game->hero.wish_y = 0;
+	}
 	else if (keycode == 13 || keycode == 126)
-		printf("up\n");
+	{
+		game->hero.wish_x = 0;
+		game->hero.wish_y = 0;
+	}
 	else if (keycode == 1 || keycode == 125)
-		printf("down\n");
+	{
+		game->hero.wish_x = 0;
+		game->hero.wish_y = 0;
+	}
 	return (game->steps);
-}
-
-static int	ft_update(t_gamestate *game)
-{
-	ft_next_frame_to_img(&game->img.fg, &game->hero.anim.idle, 64, 18);
-	ft_override_images(&game->img.render_sm, &game->img.bg, 0, 0);
-	ft_cover_images(&game->img.render_sm, &game->img.fg, 0, 0);
-	ft_scale_image_ca(&game->img.render_sm, &game->img.render);
-	mlx_put_image_to_window(game->mlx, game->window,
-		game->img.render.src, 0, 0);
-	return (0);
 }
 
 void	ft_createhooks(t_gamestate *game)

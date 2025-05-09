@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/08 20:21:01 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/09 01:26:13 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,15 @@ MK = make -C
 #
 SRCS = \
 		initialize.c \
-		initialize_checkmap.c \
+		initialize_map.c \
+		initialize_animations.c \
 		initialize_images.c \
+		initialize_tiles.c \
 		initialize_hooks.c \
 		render_animation.c \
 		render_images.c \
 		render_scale.c \
+		update_loop.c \
 		utils_1.c \
 		utils_2.c \
 		utils_colors.c \
@@ -64,12 +67,15 @@ bonus: all
 norm:
 	norminette	main.c \
 		initialize.c \
-		initialize_checkmap.c \
+		initialize_map.c \
+		initialize_animations.c \
 		initialize_images.c \
+		initialize_tiles.c \
 		initialize_hooks.c \
 		render_animation.c \
 		render_scale.c \
 		render_images.c \
+		update_loop.c \
 		utils_1.c \
 		utils_2.c \
 		utils_colors.c \

@@ -6,14 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:30:16 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 03:37:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_initialize_image(char *path,
-	t_texture *texture, t_gamestate *game)
+void	ft_init_image(char *path, t_texture *texture, t_gamestate *game)
 {
 	int	w;
 	int	h;
@@ -27,7 +26,7 @@ static void	ft_initialize_image(char *path,
 	printf("Image loaded\n");
 }
 
-void	ft_initialize_texture(t_texture *texture, t_gamestate *game,
+void	ft_init_texture(t_texture *texture, t_gamestate *game,
 		int w, int h)
 {
 	texture->w = w;
@@ -37,21 +36,21 @@ void	ft_initialize_texture(t_texture *texture, t_gamestate *game,
 		ft_exit_error("Error\nCould not create new texture\n");
 }
 
-static void	ft_initialize_animation(char *path,
+void	ft_init_animation(char *path,
 	t_texture *texture, t_animation *anim, t_gamestate *game)
 {
-	int i;
-	int fc;
+	int	i;
+	int	fc;
 
 	i = 0;
-	ft_initialize_image(path, &game->textures.temp, game);
+	ft_init_image(path, &game->textures.temp, game);
 	fc = game->textures.temp.h / game->textures.temp.w;
 	while (i < fc)
 	{
-		ft_initialize_texture(&texture[i], game,
+		ft_init_texture(&texture[i], game,
 			game->textures.temp.w, game->textures.temp.w);
 		ft_override_images(&texture[i], &game->textures.temp,
-			0, -(i * game->textures.temp.w));
+			mk_vec(0, -(i * game->textures.temp.w)), 0);
 		i++;
 	}
 	anim->frame = 0;
@@ -59,65 +58,19 @@ static void	ft_initialize_animation(char *path,
 	anim->frame_time = FRAME_TIME;
 	anim->delta = FRAME_TIME;
 	anim->src = texture;
-	//mlx_destroy_image(game->mlx, game->textures.temp.src);
 }
 
-
-static void	ft_initialize_tileset(t_gamestate *game)
+void	ft_init_images(t_gamestate *game)
 {
-	int	i;
-	int	w;
-
-	i = 0;
-	ft_initialize_image(PATH_TILES,	&game->textures.tileset, game);
-	w = game->textures.tileset.w;
-	while (i < 16)
-	{
-		ft_initialize_texture(&game->textures.tiles[i], game, w, w);
-		ft_override_images(&game->textures.tiles[i],
-			&game->textures.tileset, 0, -(i * w));
-		i++;
-	}
-}
-
-void	ft_fill_tilemap(t_gamestate *game)
-{
-	int	x;
-	int	y;
-	int	fill;
-
-	y = 0;
-	while (y < game->map.h - 1)
-	{
-		x = 0;
-		while (x < game->map.w - 1)
-		{
-			fill = 0;
-			fill += (game->map.tile[x][y] == '1') * 1;
-			fill += (game->map.tile[x + 1][y] == '1') * 2;
-			fill += (game->map.tile[x][y + 1] == '1') * 4;
-			fill += (game->map.tile[x + 1][y + 1] == '1') * 8;
-			ft_override_images(&game->img.bg, &game->textures.tiles[fill],
-				x * TILE_SIZE + TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2);
-			printf("%d", fill);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-}
-
-void	ft_initialize_images(t_gamestate *game)
-{
-	ft_initialize_texture(&game->img.render, game, game->map.w * TILE_SIZE * SCALE,
-		game->map.h * TILE_SIZE * SCALE);
-	ft_initialize_texture(&game->img.bg, game, game->map.w * TILE_SIZE,
-		game->map.h * TILE_SIZE);
-	ft_initialize_texture(&game->img.fg, game, game->map.w * TILE_SIZE,
-		game->map.h * TILE_SIZE);
-	ft_initialize_texture(&game->img.render_sm, game, game->map.w * TILE_SIZE,
-		game->map.h * TILE_SIZE);
-	ft_initialize_tileset(game);
-	ft_initialize_animation(PATH_HERO_MOVE,
-		game->textures.hero_idle, &game->hero.anim.idle, game);
+	ft_init_texture(&game->img.render, game, game->map.w * TILE_S * SCALE,
+		game->map.h * TILE_S * SCALE);
+	ft_init_texture(&game->img.bg, game, game->map.w * TILE_S,
+		game->map.h * TILE_S);
+	ft_init_texture(&game->img.fg, game, game->map.w * TILE_S,
+		game->map.h * TILE_S);
+	ft_init_texture(&game->img.render_sm, game, game->map.w * TILE_S,
+		game->map.h * TILE_S);
+	ft_init_image(PATH_ERASOR, &game->textures.erasor, game);
+	ft_init_tileset(game);
+	ft_init_animations(game);
 }

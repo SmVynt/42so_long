@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:28:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/09 01:22:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	ft_initialize(t_gamestate *game, char **argv)
 	ft_fill_map(game, fd);
 	close(fd);
 	ft_check_map(game);
-	printf("Map created\n");
 }
