@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 03:12:46 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/12 17:01:55 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,20 @@ static int	ft_key_press_hook(int keycode, t_gamestate *game)
 	else if (keycode == 0 || keycode == 123)
 	{
 		game->hero.wish_x = -1;
-		//game->hero.anim.current = &game->hero.anim.move;
 		game->hero.flipped = 1;
 	}
 	else if (keycode == 2 || keycode == 124)
 	{
 		game->hero.wish_x = 1;
-		//game->hero.anim.current = &game->hero.anim.move;
 		game->hero.flipped = 0;
 	}
 	else if (keycode == 13 || keycode == 126)
 	{
 		game->hero.wish_y = -1;
-		game->hero.anim.current = &game->hero.anim.move;
 	}
 	else if (keycode == 1 || keycode == 125)
 	{
 		game->hero.wish_y = 1;
-		game->hero.anim.current = &game->hero.anim.move;
 	}
 	return (game->steps);
 }

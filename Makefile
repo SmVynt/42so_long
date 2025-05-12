@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/09 01:26:13 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/12 16:21:30 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = \
 		render_animation.c \
 		render_images.c \
 		render_scale.c \
+		update_hero.c \
 		update_loop.c \
 		utils_1.c \
 		utils_2.c \
@@ -75,10 +76,11 @@ norm:
 		render_animation.c \
 		render_scale.c \
 		render_images.c \
+		update_hero.c \
 		update_loop.c \
 		utils_1.c \
 		utils_2.c \
 		utils_colors.c \
-		so_long.h 
+		so_long.h
 
 .PHONY: all clean fclean re bonus norm

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 04:18:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/12 16:26:05 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gamestate *game);
 
 int		ft_update(t_gamestate *game);
+void	ft_update_hero(t_gamestate *game);
 
 void	ft_next_frame_to_img(t_texture *target,
 			t_animation *anim, t_vec v, int f);
@@ -222,5 +223,7 @@ t_imgdt	get_img_data(void *img);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *a);
 t_vec	mk_vec(int x, int y);
+int		ft_lerp(int a, int b, int t);
+int		ft_tol(int a, int b);
 
 #endif

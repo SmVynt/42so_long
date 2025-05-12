@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 02:05:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/12 16:26:00 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,25 @@ t_vec	mk_vec(int x, int y)
 	v.x = x;
 	v.y = y;
 	return (v);
+}
+
+int ft_lerp(int a, int b, int t)
+{
+	float	d;
+
+	d = (float)(b - a) / (float)t;
+	if (d > -1.0f && d < 0.0f)
+		d = -1.0f;
+	if (d < 1.0f && d > 0.0f)
+		d = 1.0f;
+	return (a + (int)d);
+}
+
+int	ft_tol(int a, int b)
+{
+	int tolerance = 1;
+
+	if (a - b <= tolerance && a - b >= -tolerance)
+		return (1);
+	return (0);
 }
