@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 03:37:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/12 21:32:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void	ft_init_images(t_gamestate *game)
 		game->map.h * TILE_S);
 	ft_init_image(PATH_ERASOR, &game->textures.erasor, game);
 	ft_init_tileset(game);
+	ft_init_set(PATH_DECOR_8, game->textures.decor_8, game);
+	ft_init_set(PATH_DECOR_16, game->textures.decor_16, game);
 	ft_init_animations(game);
 }

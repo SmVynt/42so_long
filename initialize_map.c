@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 03:15:24 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 01:49:56 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void	ft_check_characters(t_gamestate *game)
 				game->c.exit++;
 			else if (game->map.tile[i][j] == 'P')
 				game->c.start++;
+			else if (game->map.tile[i][j] == 'X')
+				game->c.enemies++;
 			else if (game->map.tile[i][j] != '1' && game->map.tile[i][j] != '0')
 				ft_exit("Error\nInvalid character in map\n");
 		}
@@ -100,11 +102,12 @@ static void	ft_check_reach(t_gamestate *game)
 	}
 }
 
-static void	ft_init_hero(t_gamestate *game)
+void	ft_init_hero(t_gamestate *game)
 {
 	int	i;
 	int	j;
 
+	game->turn = 0.0f;
 	game->hero.x = 0;
 	game->hero.y = 0;
 	game->hero.wish_x = 0;
@@ -128,6 +131,34 @@ static void	ft_init_hero(t_gamestate *game)
 	}
 }
 
+void	ft_init_enemies(t_gamestate *game)
+{
+	int	x;
+	int	y;
+	int i;
+
+	i = 0;
+	x = -1;
+	printf("Initializing enemies\n");
+	while (++x < game->map.w)
+	{
+		y = -1;
+		while (++y < game->map.h)
+		{
+			if (game->map.tile[x][y] == 'X')
+			{
+				game->enemies[i].x = x * TILE_S;
+				game->enemies[i].y = y * TILE_S;
+				game->enemies[i].x_dest = x * TILE_S;
+				game->enemies[i].y_dest = y * TILE_S;
+				game->enemies[i].state = STATE_IDLE;
+				game->enemies[i].flipped = 0;
+				i++;
+			}
+		}
+	}
+}
+
 void	ft_check_map(t_gamestate *game)
 {
 	if (game->map.w < 3 || game->map.h < 3)
@@ -140,7 +171,5 @@ void	ft_check_map(t_gamestate *game)
 	printf("Map counts checked\n");
 	ft_check_reach(game);
 	printf("Map reachability checked\n");
-	ft_init_hero(game);
-	// ft_init_enemies(game);
 	// ft_init_collectibles(game);
 }

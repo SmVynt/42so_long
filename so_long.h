@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/12 16:26:05 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 02:49:04 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 # define MAX_ENEMIES 20
 # define MAX_COLLECT 30
-# define MAX_WIDTH 80
-# define MAX_HEIGHT 45
+# define MAX_WIDTH 200
+# define MAX_HEIGHT 80
 # define TILE_S 32
 # define SCALE 3
 # define FRAME_TIME 4
@@ -32,11 +32,16 @@
 # define STATE_MOVE 1
 # define STATE_DEATH 2
 # define STATE_DEAD 3
+# define STATE_CALC 9
 
 # define PATH_TILES "./textures/bg_tileset_02.xpm"
 # define PATH_HERO_IDLE "./textures/hero_01.xpm"
 # define PATH_HERO_MOVE "./textures/hero_run.xpm"
+# define PATH_ENEMY_IDLE "./textures/enemy_idle.xpm"
+# define PATH_ENEMY_MOVE "./textures/enemy_move.xpm"
 # define PATH_ERASOR "./textures/erasor.xpm"
+# define PATH_DECOR_8 "./textures/decor_8.xpm"
+# define PATH_DECOR_16 "./textures/decor_16.xpm"
 
 typedef struct s_vec
 {
@@ -92,6 +97,8 @@ typedef struct s_textures
 	t_texture	exit_idle[4];
 	t_texture	exit_open[4];
 	t_texture	erasor;
+	t_texture	decor_8[16];
+	t_texture	decor_16[16];
 	t_texture	temp;
 }	t_textures;
 
@@ -115,8 +122,10 @@ typedef struct s_enemy
 {
 	int			x;
 	int			y;
-	int			direction;
-	int			alive;
+	int			x_dest;
+	int			y_dest;
+	int			x_next;
+	int			y_next;
 	int			flipped;
 	int			state;
 	t_anim_list	anim;
@@ -172,7 +181,9 @@ typedef struct s_gamestate
 	void		*window;
 	t_render	img;
 	t_map		map;
+	float		turn;
 	int			steps;
+	int			state;
 	t_enemy		enemies[MAX_ENEMIES];
 	t_collect	collectibles[MAX_ENEMIES];
 	t_hero		hero;
@@ -193,6 +204,9 @@ void	ft_init_animation(char *path,
 			t_texture *texture, t_animation *anim, t_gamestate *game);
 void	ft_init_tileset(t_gamestate *game);
 void	ft_init_texture(t_texture *texture, t_gamestate *game, int w, int h);
+void	ft_init_set(char *path, t_texture *texture, t_gamestate *game);
+void	ft_init_hero(t_gamestate *game);
+void	ft_init_enemies(t_gamestate *game);
 void	ft_initialize(t_gamestate *game, char **argv);
 
 void	ft_check_map(t_gamestate *game);
@@ -200,6 +214,7 @@ void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gamestate *game);
 
 int		ft_update(t_gamestate *game);
+void	ft_update_enemies(t_gamestate *game);
 void	ft_update_hero(t_gamestate *game);
 
 void	ft_next_frame_to_img(t_texture *target,
@@ -225,5 +240,8 @@ size_t	ft_strlen(const char *a);
 t_vec	mk_vec(int x, int y);
 int		ft_lerp(int a, int b, int t);
 int		ft_tol(int a, int b);
+int		ft_random(int min, int max);
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 
 #endif
