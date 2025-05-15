@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 21:22:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:13:49 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_COLLECT 30
 # define MAX_WIDTH 200
 # define MAX_HEIGHT 80
-# define TILE_S 32
+# define TS 32
 # define SCALE 3
 # define FRAME_TIME 4
 # define MOVE_SPEED 0.2f

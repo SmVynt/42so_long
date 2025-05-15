@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/12 23:52:29 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:13:49 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void ft_place_decor(t_gamestate *game, t_texture *tex, t_vec cords, t_vec
 	b = 8;
 	num = ft_random(range.x, range.y);
 	ft_cover_images(&game->img.bg, &tex[num],
-		mk_vec(cords.x + ft_random(b, TILE_S - b) - 8,
-		cords.y + ft_random(b, TILE_S - b) - 8),
+		mk_vec(cords.x + ft_random(b, TS - b) - 8,
+		cords.y + ft_random(b, TS - b) - 8),
 		ft_random(0, 1));
 }
 
@@ -73,13 +73,13 @@ static void ft_add_decor(t_gamestate *game)
 		{
 			if (game->map.tile[i][j] == '1')
 				ft_place_decor(game, game->textures.decor_8,
-					mk_vec(i * TILE_S, j * TILE_S), mk_vec(8, 15));
+					mk_vec(i * TS, j * TS), mk_vec(8, 15));
 			if (game->map.tile[i][j] == '0')
 			{
 				ft_place_decor(game, game->textures.decor_8,
-					mk_vec(i * TILE_S, j * TILE_S), mk_vec(0, 7));
+					mk_vec(i * TS, j * TS), mk_vec(0, 7));
 				ft_place_decor(game, game->textures.decor_8,
-					mk_vec(i * TILE_S, j * TILE_S), mk_vec(0, 3));
+					mk_vec(i * TS, j * TS), mk_vec(0, 3));
 			}
 		}
 	}
@@ -103,7 +103,7 @@ void	ft_fill_tilemap(t_gamestate *game)
 			fill += (game->map.tile[x][y + 1] == '1') * 4;
 			fill += (game->map.tile[x + 1][y + 1] == '1') * 8;
 			ft_override_images(&game->img.bg, &game->textures.tiles[fill],
-				mk_vec(x * TILE_S + TILE_S / 2, y * TILE_S + TILE_S / 2), 0);
+				mk_vec(x * TS + TS / 2, y * TS + TS / 2), 0);
 			x++;
 		}
 		printf("\n");

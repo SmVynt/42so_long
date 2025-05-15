@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 22:46:06 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:25:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ void	ft_init_hero(t_gamestate *game)
 		{
 			if (game->map.tile[i][j] == 'P')
 			{
-				game->hero.x = i * TILE_S;
-				game->hero.y = j * TILE_S;
+				game->hero.x = i * TS;
+				game->hero.y = j * TS;
 				game->map.tile[i][j] = '0';
 			}
 		}
 	}
-	game->hero.x_prev = game->hero.x;
-	game->hero.y_prev = game->hero.y;
-	game->hero.x_next = game->hero.x;
-	game->hero.y_next = game->hero.y;
+	game->hero.x_prev = game->hero.x / TS;
+	game->hero.y_prev = game->hero.y / TS;
+	game->hero.x_next = game->hero.x / TS;
+	game->hero.y_next = game->hero.y / TS;
 }
 
 void	ft_init_enemies(t_gamestate *game)
@@ -57,12 +57,12 @@ void	ft_init_enemies(t_gamestate *game)
 		{
 			if (game->map.tile[x][y] == 'X')
 			{
-				game->enemies[i].x = x * TILE_S;
-				game->enemies[i].y = y * TILE_S;
-				game->enemies[i].x_next = x * TILE_S;
-				game->enemies[i].y_next = y * TILE_S;
-				game->enemies[i].x_dest = x * TILE_S;
-				game->enemies[i].y_dest = y * TILE_S;
+				game->enemies[i].x = x * TS;
+				game->enemies[i].y = y * TS;
+				game->enemies[i].x_next = x;
+				game->enemies[i].y_next = y;
+				game->enemies[i].x_dest = x;
+				game->enemies[i].y_dest = y;
 				game->enemies[i].state = STATE_IDLE;
 				game->enemies[i++].flipped = 0;
 			}
