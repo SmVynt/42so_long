@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/13 00:10:43 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/15 21:22:06 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = \
 		initialize_animations.c \
 		initialize_images.c \
 		initialize_sets.c \
+		initialize_hero.c \
 		initialize_hooks.c \
 		render_animation.c \
 		render_images.c \
@@ -74,6 +75,7 @@ norm:
 		initialize_animations.c \
 		initialize_images.c \
 		initialize_sets.c \
+		initialize_hero.c \
 		initialize_hooks.c \
 		render_animation.c \
 		render_scale.c \
