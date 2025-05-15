@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:13:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:47:15 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCALE 3
 # define FRAME_TIME 4
 # define MOVE_SPEED 0.2f
-# define GAME_LERP 0.2f
+# define GAME_LERP 0.3f
 
 # define STATE_IDLE 0
 # define STATE_MOVE 1
@@ -173,6 +173,7 @@ typedef struct s_render
 {
 	t_texture	bg;
 	t_texture	decor;
+	t_texture	en;
 	t_texture	fg;
 	t_texture	render_sm;
 	t_texture	render;

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:33:03 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:42:13 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_find_next_spot(t_enemy *enemy)
 
 static void ft_update_enemy_move(t_gamestate *game, t_enemy *enemy)
 {
-	ft_override_images(&game->img.fg, &game->textures.erasor,
+	ft_override_images(&game->img.en, &game->textures.erasor,
 		mk_vec(enemy->x, enemy->y - 6), 0);
 	enemy->x = ft_lerp_int(enemy->x_prev * TS, enemy->x_next * TS, game->turn);
 	enemy->y = ft_lerp_int(enemy->y_prev * TS, enemy->y_next * TS, game->turn);
@@ -72,7 +72,6 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 	e.y = enemy->y_next;
 	h.x = game->hero.x_next;
 	h.y = game->hero.y_next;
-	printf("e: %d %d -> %d %d\n", e.x, e.y, h.x, h.y);
 	if (e.x == h.x || e.y == h.y)
 	{
 		if (ft_check_reach(game, mk_vec(e.x, e.y), mk_vec(h.x, h.y)) == 0)
@@ -84,7 +83,6 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 			enemy->flipped = 1;
 		enemy->state = STATE_MOVE;
 		enemy->anim.current = &enemy->anim.move;
-		printf(" dest: %d %d\n", enemy->x_dest, enemy->y_dest);
 		return (1);
 	}
 	return (0);
@@ -103,16 +101,14 @@ void	ft_update_enemies(t_gamestate *game)
 		{
 			enemy->x = enemy->x_next * TS;
 			enemy->y = enemy->y_next * TS;
+			if (enemy->x_dest == enemy->x / TS && enemy->y_dest == enemy->y / TS)
+				enemy->anim.current = &enemy->anim.idle;
 			ft_enemy_search(game, enemy);
 			ft_find_next_spot(enemy);
 		}
 		if (game->state == STATE_MOVE && enemy->state == STATE_MOVE)
-		{
 			ft_update_enemy_move(game, enemy);
-			if (enemy->x_dest == enemy->x / TS && enemy->y_dest == enemy->y / TS)
-				enemy->anim.current = &enemy->anim.idle;
-		}
-		ft_next_frame_to_img(&game->img.fg, enemy->anim.current,
+		ft_next_frame_to_img(&game->img.en, enemy->anim.current,
 			mk_vec(enemy->x, enemy->y - 6), enemy->flipped);
 		i++;
 	}

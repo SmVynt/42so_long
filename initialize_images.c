@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:13:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/15 23:37:33 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ void	ft_init_animation(char *path,
 
 void	ft_init_images(t_gamestate *game)
 {
-	ft_init_texture(&game->img.render, game, game->map.w * TS * SCALE,
-		game->map.h * TS * SCALE);
-	ft_init_texture(&game->img.bg, game, game->map.w * TS,
-		game->map.h * TS);
-	ft_init_texture(&game->img.fg, game, game->map.w * TS,
-		game->map.h * TS);
-	ft_init_texture(&game->img.render_sm, game, game->map.w * TS,
-		game->map.h * TS);
+	t_vec	s;
+
+	s.x = game->map.w * TS;
+	s.y = game->map.h * TS;
+	ft_init_texture(&game->img.render, game, s.x * SCALE, s.y * SCALE);
+	ft_init_texture(&game->img.bg, game, s.x, s.y);
+	ft_init_texture(&game->img.decor, game, s.x, s.y);
+	ft_init_texture(&game->img.en, game, s.x, s.y);
+	ft_init_texture(&game->img.fg, game, s.x, s.y);
+	ft_init_texture(&game->img.render_sm, game, s.x, s.y);
 	ft_init_image(PATH_ERASOR, &game->textures.erasor, game);
 	ft_init_tileset(game);
 	ft_init_set(PATH_DECOR_8, game->textures.decor_8, game);
