@@ -6,14 +6,16 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:42:13 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 01:04:11 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_find_next_spot(t_enemy *enemy)
+static void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy)
 {
+	int	i;
+
 	enemy->x_prev = enemy->x_next;
 	enemy->y_prev = enemy->y_next;
 	enemy->x_next = enemy->x_dest;
@@ -26,12 +28,23 @@ static void	ft_find_next_spot(t_enemy *enemy)
 		enemy->y_next = enemy->y / TS + 1;
 	if (enemy->y_dest < enemy->y / TS)
 		enemy->y_next = enemy->y / TS - 1;
+	i = -1;
+	while (++i < game->c.enemies)
+	{
+		if (game->enemies[i].x_next == enemy->x_next &&
+			game->enemies[i].y_next == enemy->y_next &&
+			&game->enemies[i] != enemy)
+		{
+			enemy->x_next = enemy->x_prev;
+			enemy->y_next = enemy->y_prev;
+		}
+	}
 }
 
 static void ft_update_enemy_move(t_gamestate *game, t_enemy *enemy)
 {
-	ft_override_images(&game->img.en, &game->textures.erasor,
-		mk_vec(enemy->x, enemy->y - 6), 0);
+	// ft_override_images(&game->img.en, &game->textures.erasor_sm,
+	// 	mk_vec(enemy->x + TS / 6, enemy->y - 6 + TS / 6), 0);
 	enemy->x = ft_lerp_int(enemy->x_prev * TS, enemy->x_next * TS, game->turn);
 	enemy->y = ft_lerp_int(enemy->y_prev * TS, enemy->y_next * TS, game->turn);
 }
@@ -59,7 +72,6 @@ static int	ft_check_reach(t_gamestate *game, t_vec a, t_vec b)
 				return (0);
 		}
 	}
-	printf("found!\n");
 	return (1);
 }
 
@@ -93,23 +105,29 @@ void	ft_update_enemies(t_gamestate *game)
 	int		i;
 	t_enemy	*enemy;
 
+	ft_clean_texture(&game->img.en);
 	i = 0;
 	while (i < game->c.enemies)
 	{
 		enemy = &game->enemies[i];
 		if (game->state == STATE_CALC)
 		{
+			game->turn = 0.0f;
 			enemy->x = enemy->x_next * TS;
 			enemy->y = enemy->y_next * TS;
 			if (enemy->x_dest == enemy->x / TS && enemy->y_dest == enemy->y / TS)
 				enemy->anim.current = &enemy->anim.idle;
 			ft_enemy_search(game, enemy);
-			ft_find_next_spot(enemy);
+			ft_find_next_spot(game, enemy);
 		}
-		if (game->state == STATE_MOVE && enemy->state == STATE_MOVE)
+		else if (game->state == STATE_CALC2)
+			ft_enemy_search(game, enemy);
+		if (game->state == STATE_ENEMIES && enemy->state == STATE_MOVE)
 			ft_update_enemy_move(game, enemy);
-		ft_next_frame_to_img(&game->img.en, enemy->anim.current,
+		ft_next_frame_to_img_cover(&game->img.en, enemy->anim.current,
 			mk_vec(enemy->x, enemy->y - 6), enemy->flipped);
 		i++;
 	}
+	if (game->state == STATE_CALC)
+		game->state = STATE_ENEMIES;
 }

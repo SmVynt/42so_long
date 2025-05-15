@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 02:26:38 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 01:01:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,27 @@ t_imgdt	get_img_data(void *img)
 	return (img_data);
 }
 
-void	ft_set_pixel(char *dst, int x, int y, int color)
+void	ft_clean_texture(t_texture *dst)
 {
-	(void)x;
-	(void)y;
-	dst[0] = get_r(color);
-	dst[1] = get_g(color);
-	dst[2] = get_b(color);
-	dst[3] = get_a(color);
+	int		i;
+	int		j;
+	char	*dst_ptr;
+
+	dst_ptr = get_img_data(dst->src).data;
+	i = 0;
+	while (i < dst->h)
+	{
+		j = 0;
+		while (j < dst->w)
+		{
+			dst_ptr[i * dst->w * 4 + j * 4 + 0] = 0;
+			dst_ptr[i * dst->w * 4 + j * 4 + 1] = 0;
+			dst_ptr[i * dst->w * 4 + j * 4 + 2] = 0;
+			dst_ptr[i * dst->w * 4 + j * 4 + 3] = 0;
+			j++;
+		}
+		i++;
+	}
 }
 
 void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
@@ -47,6 +60,7 @@ void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
 		j = 0;
 		while (j < src->w)
 		{
+
 			jf = j * (1 - f) + (src->w - j - 1) * f;
 			if (v.x + jf >= 0 && v.x + jf < dst->w
 				&& v.y + i >= 0 && v.y + i < dst->h)

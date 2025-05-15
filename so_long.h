@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:47:15 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 01:04:50 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@
 # define SCALE 3
 # define FRAME_TIME 4
 # define MOVE_SPEED 0.2f
-# define GAME_LERP 0.3f
+# define GAME_LERP 0.5f
 
 # define STATE_IDLE 0
 # define STATE_MOVE 1
 # define STATE_DEATH 2
-# define STATE_DEAD 3
-# define STATE_CALC 9
+# define STATE_HERO 3
+# define STATE_ENEMIES 4
+# define STATE_CALC 8
+# define STATE_CALC2 9
 
 # define PATH_TILES "./textures/bg_tileset_02.xpm"
 # define PATH_HERO_IDLE "./textures/hero_01.xpm"
@@ -98,6 +100,7 @@ typedef struct s_textures
 	t_texture	exit_idle[4];
 	t_texture	exit_open[4];
 	t_texture	erasor;
+	t_texture	erasor_sm;
 	t_texture	decor_8[16];
 	t_texture	decor_16[16];
 	t_texture	temp;
@@ -223,6 +226,8 @@ void	ft_update_hero(t_gamestate *game);
 
 void	ft_next_frame_to_img(t_texture *target,
 			t_animation *anim, t_vec v, int f);
+void	ft_next_frame_to_img_cover(t_texture *target,
+			t_animation *anim, t_vec v, int f);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);
@@ -230,6 +235,7 @@ void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f);
 void	ft_cover_images(t_texture *dst, t_texture *src, t_vec v, int f);
 void	ft_copy_pixel(char *dst, char *src);
 void	ft_cover_pixel(char *dst, char *src);
+void	ft_clean_texture(t_texture *dst);
 
 int		get_rgba(int r, int g, int b, int a);
 int		get_r(int rgba);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:38:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 00:30:17 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void	ft_update_state(t_gamestate *game)
 {
-	if (game->state == STATE_CALC)
-	{
-		game->state = STATE_IDLE;
-		game->turn = 0.0f;
-	}
-	else if (game->state == STATE_MOVE)
+	if (game->state == STATE_HERO || game->state == STATE_ENEMIES)
 	{
 		game->turn = ft_lerp(game->turn, 1.0f, GAME_LERP);
 		if(game->turn >= 0.99f)
 		{
 			game->turn = 1.0f;
-			game->state = STATE_CALC;
+			if (game->state == STATE_ENEMIES)
+				game->state = STATE_CALC2;
+			else if (game->state == STATE_HERO)
+				game->state = STATE_CALC;
 		}
 	}
+	else if (game->state == STATE_CALC2)
+		game->state = STATE_IDLE;
 }
 
 int	ft_update(t_gamestate *game)

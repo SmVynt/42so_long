@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/09 02:14:44 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 01:04:08 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,18 @@ void	ft_next_frame_to_img(t_texture *target,
 			anim->frame = 0;
 	}
 	ft_override_images(target, &anim->src[anim->frame], v, f);
+}
+
+void	ft_next_frame_to_img_cover(t_texture *target,
+			t_animation *anim, t_vec v, int f)
+{
+	anim->frame_time--;
+	if (anim->frame_time <= 0)
+	{
+	anim->frame_time = anim->delta;
+	anim->frame++;
+	if (anim->frame >= anim->frame_count)
+		anim->frame = 0;
+	}
+	ft_cover_images(target, &anim->src[anim->frame], v, f);
 }

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:37:33 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/16 00:53:11 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_init_images(t_gamestate *game)
 	ft_init_texture(&game->img.fg, game, s.x, s.y);
 	ft_init_texture(&game->img.render_sm, game, s.x, s.y);
 	ft_init_image(PATH_ERASOR, &game->textures.erasor, game);
+	ft_init_texture(&game->textures.erasor_sm, game, TS * 2 / 3, TS * 2 / 3);
+	ft_override_images(&game->textures.erasor_sm, &game->textures.erasor, mk_vec(0, 0), 0);
 	ft_init_tileset(game);
 	ft_init_set(PATH_DECOR_8, game->textures.decor_8, game);
 	ft_init_set(PATH_DECOR_16, game->textures.decor_16, game);
