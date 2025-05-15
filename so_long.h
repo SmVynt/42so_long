@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/13 02:49:04 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 03:51:58 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define TILE_S 32
 # define SCALE 3
 # define FRAME_TIME 4
-# define MOVE_SPEED 5
+# define MOVE_SPEED 0.2f
+# define GAME_LERP 0.2f
 
 # define STATE_IDLE 0
 # define STATE_MOVE 1
@@ -106,10 +107,10 @@ typedef struct s_hero
 {
 	int			x;
 	int			y;
-	int			dir_x;
-	int			dir_y;
-	int			x_dest;
-	int			y_dest;
+	int			x_next;
+	int			y_next;
+	int			x_prev;
+	int			y_prev;
 	int			wish_x;
 	int			wish_y;
 	int			alive;
@@ -126,6 +127,8 @@ typedef struct s_enemy
 	int			y_dest;
 	int			x_next;
 	int			y_next;
+	int			x_prev;
+	int			y_prev;
 	int			flipped;
 	int			state;
 	t_anim_list	anim;
@@ -238,10 +241,12 @@ t_imgdt	get_img_data(void *img);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *a);
 t_vec	mk_vec(int x, int y);
-int		ft_lerp(int a, int b, int t);
+int		ft_lerp_int(int a, int b, float t);
+float	ft_lerp(float a, float b, float t);
 int		ft_tol(int a, int b);
 int		ft_random(int min, int max);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
+int		ft_dir(int a, int b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/13 02:52:03 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 03:25:11 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@
 // 		hero->anim.current = &hero->anim.idle;
 // 	}
 // }
+
+static void ft_calculate_next_move(t_enemy *enemy)
+{
+	printf("%d %d -> %d %d\n", enemy->x, enemy->y, enemy->x_dest, enemy->y_dest);
+	enemy->x_next = enemy->x + TILE_S * ft_dir(enemy->x_dest, enemy->x);
+	enemy->y_next = enemy->y + TILE_S * ft_dir(enemy->y_dest, enemy->y);
+	enemy->x_prev = enemy->x;
+	enemy->y_prev = enemy->y;
+	printf("===========\n");
+	printf("%d %d -> %d %d\n", enemy->x_prev, enemy->y_prev, enemy->x_next, enemy->y_next);
+}
 
 static int	ft_check_reach(t_gamestate *game, t_vec a, t_vec b)
 {
@@ -69,10 +80,11 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 		if (ft_check_reach(game, mk_vec(e.x, e.y), mk_vec(h.x, h.y)) == 0)
 			return (0);
 		enemy->flipped = 0;
-		enemy->x_dest = h.x;
+		enemy->x_dest = game->hero.x;
 		if (enemy->x_dest < enemy->x)
 			enemy->flipped = 1;
-		enemy->y_dest = h.y;
+		enemy->y_dest = game->hero.y;
+		ft_calculate_next_move(enemy);
 		return (1);
 	}
 	return (0);
@@ -95,6 +107,7 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 // 	}
 // }
 
+
 void	ft_update_enemies(t_gamestate *game)
 {
 	int		i;
@@ -104,6 +117,24 @@ void	ft_update_enemies(t_gamestate *game)
 	while (i < game->c.enemies)
 	{
 		enemy = &game->enemies[i];
+		if (enemy->state == STATE_MOVE)
+		{
+			if (game->state == STATE_CALC)
+			{
+				if (enemy->x_dest == enemy->x && enemy->y_dest == enemy->y)
+				{
+					enemy->state = STATE_IDLE;
+					enemy->anim.current = &enemy->anim.idle;
+				}
+				else
+					ft_calculate_next_move(enemy);
+			}
+			else
+			{
+				enemy->x = ft_lerp(enemy->x_prev, enemy->x_next, game->turn);
+				enemy->y = ft_lerp(enemy->y_prev, enemy->y_next, game->turn);
+			}
+		}
 		if (enemy->state == STATE_IDLE)
 		{
 			if (game->state == STATE_CALC)
@@ -112,12 +143,8 @@ void	ft_update_enemies(t_gamestate *game)
 				{
 					enemy->state = STATE_MOVE;
 					enemy->anim.current = &enemy->anim.move;
-					printf("found!\n");
 				}
 			}
-		}
-		if (enemy->state == STATE_MOVE)
-		{
 		}
 		ft_next_frame_to_img(&game->img.fg, enemy->anim.current,
 			mk_vec(enemy->x, enemy->y - 6), enemy->flipped);

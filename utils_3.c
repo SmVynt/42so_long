@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/13 02:10:03 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 03:11:27 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,13 @@ int	ft_max(int a, int b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+int	ft_dir(int a, int b)
+{
+	if (a < b)
+		return (-1);
+	if (a > b)
+		return (1);
+	return (0);
 }

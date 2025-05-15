@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/13 01:49:56 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/13 04:04:59 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ void	ft_init_hero(t_gamestate *game)
 	int	j;
 
 	game->turn = 0.0f;
-	game->hero.x = 0;
-	game->hero.y = 0;
 	game->hero.wish_x = 0;
 	game->hero.wish_y = 0;
 	game->hero.alive = 1;
@@ -129,6 +127,8 @@ void	ft_init_hero(t_gamestate *game)
 			}
 		}
 	}
+	game->hero.x_prev = game->hero.x;
+	game->hero.y_prev = game->hero.y;
 }
 
 void	ft_init_enemies(t_gamestate *game)
