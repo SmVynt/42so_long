@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 21:20:11 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:36:32 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 	while (buffer_size > 0)
 	{
 		if (i > MAX_WIDTH || game->map.h > MAX_HEIGHT)
-			ft_exit("Error\nMap is too large\n");
+			ft_exit("Map is too large\n");
 		game->map.tile[i][game->map.h - 1] = buffer;
 		if (buffer == '\n')
 		{
@@ -43,7 +43,7 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 			if (game->map.w == 1)
 				game->map.w = i;
 			else if (i != game->map.w)
-				ft_exit("Error\nMap is not rectangular\n");
+				ft_exit("Map is not rectangular\n");
 			i = -1;
 		}
 		i++;
@@ -62,7 +62,7 @@ void	ft_initialize(t_gamestate *game, char **argv)
 	close(fd);
 	ft_check_map(game);
 	ft_init_hero(game);
-	ft_init_enemies(game);
+	ft_init_objs(game);
 	game->state = STATE_CALC;
 	game->turn = 0.0f;
 }

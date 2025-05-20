@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:25:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:51:20 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_init_hero(t_gamestate *game)
 		j = -1;
 		while (++j < game->map.h)
 		{
-			if (game->map.tile[i][j] == 'P')
+			if (game->map.tile[i][j] == CHAR_PLAYER)
 			{
 				game->hero.x = i * TS;
 				game->hero.y = j * TS;
-				game->map.tile[i][j] = '0';
+				game->map.tile[i][j] = CHAR_EMPTY;
 			}
 		}
 	}
@@ -39,33 +39,4 @@ void	ft_init_hero(t_gamestate *game)
 	game->hero.y_prev = game->hero.y / TS;
 	game->hero.x_next = game->hero.x / TS;
 	game->hero.y_next = game->hero.y / TS;
-}
-
-void	ft_init_enemies(t_gamestate *game)
-{
-	int	x;
-	int	y;
-	int i;
-
-	i = 0;
-	x = -1;
-	printf("Initializing enemies\n");
-	while (++x < game->map.w)
-	{
-		y = -1;
-		while (++y < game->map.h)
-		{
-			if (game->map.tile[x][y] == 'X')
-			{
-				game->enemies[i].x = x * TS;
-				game->enemies[i].y = y * TS;
-				game->enemies[i].x_next = x;
-				game->enemies[i].y_next = y;
-				game->enemies[i].x_dest = x;
-				game->enemies[i].y_dest = y;
-				game->enemies[i].state = STATE_IDLE;
-				game->enemies[i++].flipped = 0;
-			}
-		}
-	}
 }

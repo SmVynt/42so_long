@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/16 01:04:50 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:32:20 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,25 @@
 # define STATE_CALC2 9
 
 # define PATH_TILES "./textures/bg_tileset_02.xpm"
-# define PATH_HERO_IDLE "./textures/hero_01.xpm"
+# define PATH_HERO_IDLE "./textures/hero_idle.xpm"
 # define PATH_HERO_MOVE "./textures/hero_run.xpm"
 # define PATH_ENEMY_IDLE "./textures/enemy_idle.xpm"
 # define PATH_ENEMY_MOVE "./textures/enemy_move.xpm"
 # define PATH_ERASOR "./textures/erasor.xpm"
 # define PATH_DECOR_8 "./textures/decor_8.xpm"
 # define PATH_DECOR_16 "./textures/decor_16.xpm"
+# define PATH_EXIT_O "./textures/exit_opened.xpm"
+# define PATH_EXIT_C "./textures/exit_closed.xpm"
+# define PATH_EXIT_OP "./textures/exit_open.xpm"
+# define PATH_CRYSTAL "./textures/crystal.xpm"
+# define PATH_CRYSTAL_TAKE "./textures/crystal_take.xpm"
+
+# define CHAR_WALL '1'
+# define CHAR_EMPTY '0'
+# define CHAR_PLAYER 'P'
+# define CHAR_ENEMY 'X'
+# define CHAR_COLLECT 'C'
+# define CHAR_EXIT 'E'
 
 typedef struct s_vec
 {
@@ -81,7 +93,8 @@ typedef struct s_anim_list
 	t_animation	*current;
 	t_animation	idle;
 	t_animation	move;
-	t_animation	death;
+	t_animation	transition;
+	t_animation	idle2;
 }	t_anim_list;
 
 typedef struct s_textures
@@ -191,8 +204,9 @@ typedef struct s_gamestate
 	float		turn;
 	int			steps;
 	int			state;
-	t_enemy		enemies[MAX_ENEMIES];
-	t_collect	collectibles[MAX_ENEMIES];
+	t_exit		exit;
+	t_enemy		*enemies;
+	t_collect	*collects;
 	t_hero		hero;
 	t_count		c;
 	t_textures	textures;
@@ -213,7 +227,7 @@ void	ft_init_tileset(t_gamestate *game);
 void	ft_init_texture(t_texture *texture, t_gamestate *game, int w, int h);
 void	ft_init_set(char *path, t_texture *texture, t_gamestate *game);
 void	ft_init_hero(t_gamestate *game);
-void	ft_init_enemies(t_gamestate *game);
+void	ft_init_objs(t_gamestate *game);
 void	ft_initialize(t_gamestate *game, char **argv);
 
 void	ft_check_map(t_gamestate *game);

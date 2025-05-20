@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 21:22:29 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:35:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_check_bounds(t_gamestate *game)
 	{
 		if (game->map.tile[x][0] != '1'
 			|| game->map.tile[x][game->map.h - 1] != '1')
-			ft_exit("Error\nMap is not surrounded by walls\n");
+			ft_exit("Map is not surrounded by walls\n");
 		x++;
 	}
 	y = 0;
@@ -30,7 +30,7 @@ static void	ft_check_bounds(t_gamestate *game)
 	{
 		if (game->map.tile[0][y] != '1'
 			|| game->map.tile[game->map.w - 1][y] != '1')
-			ft_exit("Error\nMap is not surrounded by walls\n");
+			ft_exit("Map is not surrounded by walls\n");
 		y++;
 	}
 }
@@ -40,6 +40,7 @@ static void	ft_check_characters(t_gamestate *game)
 	int	i;
 	int	j;
 
+	game->c.enemies = 0;
 	game->c.collectibles = 0;
 	game->c.exit = 0;
 	game->c.start = 0;
@@ -58,7 +59,7 @@ static void	ft_check_characters(t_gamestate *game)
 			else if (game->map.tile[i][j] == 'X')
 				game->c.enemies++;
 			else if (game->map.tile[i][j] != '1' && game->map.tile[i][j] != '0')
-				ft_exit("Error\nInvalid character in map\n");
+				ft_exit("Invalid character in map\n");
 		}
 	}
 }
@@ -66,11 +67,11 @@ static void	ft_check_characters(t_gamestate *game)
 static void	ft_check_count(t_gamestate *game)
 {
 	if (game->c.collectibles < 1)
-		ft_exit("Error\nNo collectibles in map\n");
+		ft_exit("No collectibles in map\n");
 	if (game->c.exit != 1)
-		ft_exit("Error\nThere must be exactly one exit\n");
+		ft_exit("There must be exactly one exit\n");
 	if (game->c.start != 1)
-		ft_exit("Error\nThere must be exactly one start position\n");
+		ft_exit("There must be exactly one start position\n");
 }
 
 static void	ft_check_reach(t_gamestate *game)
@@ -97,7 +98,7 @@ static void	ft_check_reach(t_gamestate *game)
 		while (++i < game->map.w)
 		{
 			if (map_reach.tile[i][j] == 'C' || map_reach.tile[i][j] == 'E')
-				ft_exit("Error\nMap is not reachable\n");
+				ft_exit("Map is not reachable\n");
 		}
 	}
 }
@@ -105,7 +106,7 @@ static void	ft_check_reach(t_gamestate *game)
 void	ft_check_map(t_gamestate *game)
 {
 	if (game->map.w < 3 || game->map.h < 3)
-		ft_exit("Error\nMap is too small\n");
+		ft_exit("Map is too small\n");
 	ft_check_bounds(game);
 	printf("Map bounds checked\n");
 	ft_check_characters(game);

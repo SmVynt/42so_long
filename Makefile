@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/15 21:22:06 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/20 19:52:05 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ MK = make -C
 #
 SRCS = \
 		initialize.c \
-		initialize_map.c \
 		initialize_animations.c \
+		initialize_map.c \
+		initialize_objs.c \
 		initialize_images.c \
 		initialize_sets.c \
 		initialize_hero.c \
@@ -71,8 +72,9 @@ bonus: all
 norm:
 	norminette	main.c \
 		initialize.c \
-		initialize_map.c \
 		initialize_animations.c \
+		initialize_map.c \
+		initialize_objs.c \
 		initialize_images.c \
 		initialize_sets.c \
 		initialize_hero.c \

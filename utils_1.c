@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/08 20:47:38 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:35:06 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	ft_exit_error(char *str)
 {
+	write(1, "Error\n", 6);
 	perror(str);
 	exit(EXIT_FAILURE);
 }
 
 void	ft_exit(char *str)
 {
+	write(1, "Error\n", 6);
 	while (*str)
 	{
 		write(1, str, 1);
@@ -30,6 +32,16 @@ void	ft_exit(char *str)
 
 int	ft_exit_game(t_gamestate *game)
 {
+	if (game->mlx)
+	{
+		mlx_destroy_window(game->mlx, game->window);
+		free(game->mlx);
+	}
+	if (game->enemies)
+		free(game->enemies);
+	// if (game->collects)
+	// 	free(game->collects);
+
 	exit(0);
 	return (game->steps);
 }
