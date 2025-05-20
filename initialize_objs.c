@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:50:59 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:20:46 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void ft_init_enemy(t_gamestate *game, int *i, int x, int y)
+static void	ft_init_enemy(t_gamestate *game, int *i, int x, int y)
 {
 	printf("Enemy %d initialized at (%d, %d)\n", *i, x, y);
 	game->enemies[*i].x = x * TS;
@@ -26,7 +26,7 @@ static void ft_init_enemy(t_gamestate *game, int *i, int x, int y)
 	(*i) += 1;
 }
 
-static void ft_init_collect(t_gamestate *game, int *i, int x, int y)
+static void	ft_init_collect(t_gamestate *game, int *i, int x, int y)
 {
 	game->collects[*i].x = x * TS;
 	game->collects[*i].y = y * TS;
@@ -39,8 +39,8 @@ void	ft_init_objs(t_gamestate *game)
 {
 	int	x;
 	int	y;
-	int ie;
-	int ic;
+	int	ie;
+	int	ic;
 
 	ie = 0;
 	game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
@@ -55,9 +55,9 @@ void	ft_init_objs(t_gamestate *game)
 		y = -1;
 		while (++y < game->map.h)
 		{
-			if (game->map.tile[x][y] == CHAR_ENEMY)
+			if (game->map.tile[x][y] == C_EN)
 				ft_init_enemy(game, &ie, x, y);
-			if (game->map.tile[x][y] == CHAR_COLLECT)
+			if (game->map.tile[x][y] == C_CL)
 				ft_init_collect(game, &ic, x, y);
 		}
 	}

@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/20 19:52:05 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/20 20:11:45 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = \
 		utils_2.c \
 		utils_3.c \
 		utils_colors.c \
+		utils_enemies.c \
 		main.c
 OBJS = $(SRCS:.c=.o)
 #
@@ -89,6 +90,7 @@ norm:
 		utils_2.c \
 		utils_3.c \
 		utils_colors.c \
+		utils_enemies.c \
 		so_long.h
 
 .PHONY: all clean fclean re bonus norm

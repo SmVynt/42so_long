@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/13 03:11:27 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:58:00 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ int	ft_dir(int a, int b)
 	if (a < b)
 		return (-1);
 	if (a > b)
+		return (1);
+	return (0);
+}
+
+int	ft_tol(int a, int b)
+{
+	int	tolerance;
+
+	tolerance = 1;
+	if (a - b <= tolerance && a - b >= -tolerance)
 		return (1);
 	return (0);
 }

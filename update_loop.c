@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/16 00:30:17 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:59:44 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_update_state(t_gamestate *game)
 	if (game->state == STATE_HERO || game->state == STATE_ENEMIES)
 	{
 		game->turn = ft_lerp(game->turn, 1.0f, GAME_LERP);
-		if(game->turn >= 0.99f)
+		if (game->turn >= 0.99f)
 		{
 			game->turn = 1.0f;
 			if (game->state == STATE_ENEMIES)

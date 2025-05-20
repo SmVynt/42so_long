@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/16 01:01:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:04:49 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
 		j = 0;
 		while (j < src->w)
 		{
-
 			jf = j * (1 - f) + (src->w - j - 1) * f;
 			if (v.x + jf >= 0 && v.x + jf < dst->w
 				&& v.y + i >= 0 && v.y + i < dst->h)

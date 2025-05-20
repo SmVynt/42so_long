@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:32:20 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:11:21 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@
 # define PATH_CRYSTAL "./textures/crystal.xpm"
 # define PATH_CRYSTAL_TAKE "./textures/crystal_take.xpm"
 
-# define CHAR_WALL '1'
-# define CHAR_EMPTY '0'
-# define CHAR_PLAYER 'P'
-# define CHAR_ENEMY 'X'
-# define CHAR_COLLECT 'C'
-# define CHAR_EXIT 'E'
+# define C_WL '1'
+# define C_EM '0'
+# define C_PL 'P'
+# define C_EN 'X'
+# define C_CL 'C'
+# define C_EX 'E'
 
 typedef struct s_vec
 {
@@ -237,6 +237,8 @@ void	ft_fill_tilemap(t_gamestate *game);
 int		ft_update(t_gamestate *game);
 void	ft_update_enemies(t_gamestate *game);
 void	ft_update_hero(t_gamestate *game);
+
+void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy);
 
 void	ft_next_frame_to_img(t_texture *target,
 			t_animation *anim, t_vec v, int f);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:35:06 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 19:59:19 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int	ft_exit_game(t_gamestate *game)
 	}
 	if (game->enemies)
 		free(game->enemies);
-	// if (game->collects)
-	// 	free(game->collects);
-
+	if (game->collects)
+		free(game->collects);
 	exit(0);
 	return (game->steps);
 }

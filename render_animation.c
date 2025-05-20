@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:00 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/16 01:04:08 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:13:36 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	ft_next_frame_to_img_cover(t_texture *target,
 	anim->frame_time--;
 	if (anim->frame_time <= 0)
 	{
-	anim->frame_time = anim->delta;
-	anim->frame++;
-	if (anim->frame >= anim->frame_count)
-		anim->frame = 0;
+		anim->frame_time = anim->delta;
+		anim->frame++;
+		if (anim->frame >= anim->frame_count)
+			anim->frame = 0;
 	}
 	ft_cover_images(target, &anim->src[anim->frame], v, f);
 }

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/15 23:13:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:16:16 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	ft_init_tileset(t_gamestate *game)
 
 void	ft_init_set(char *path, t_texture *texture, t_gamestate *game)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	ft_init_image(path, &game->textures.temp, game);
@@ -47,7 +47,8 @@ void	ft_init_set(char *path, t_texture *texture, t_gamestate *game)
 	}
 }
 
-static void ft_place_decor(t_gamestate *game, t_texture *tex, t_vec cords, t_vec range)
+static void	ft_place_decor(t_gamestate *game, t_texture *tex,
+		t_vec coords, t_vec range)
 {
 	int	num;
 	int	b;
@@ -55,15 +56,15 @@ static void ft_place_decor(t_gamestate *game, t_texture *tex, t_vec cords, t_vec
 	b = 8;
 	num = ft_random(range.x, range.y);
 	ft_cover_images(&game->img.bg, &tex[num],
-		mk_vec(cords.x + ft_random(b, TS - b) - 8,
-		cords.y + ft_random(b, TS - b) - 8),
+		mk_vec(coords.x + ft_random(b, TS - b) - 8,
+			coords.y + ft_random(b, TS - b) - 8),
 		ft_random(0, 1));
 }
 
-static void ft_add_decor(t_gamestate *game)
+static void	ft_add_decor(t_gamestate *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < game->map.w)

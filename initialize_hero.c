@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:51:20 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:12:27 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_init_hero(t_gamestate *game)
 		j = -1;
 		while (++j < game->map.h)
 		{
-			if (game->map.tile[i][j] == CHAR_PLAYER)
+			if (game->map.tile[i][j] == C_PL)
 			{
 				game->hero.x = i * TS;
 				game->hero.y = j * TS;
-				game->map.tile[i][j] = CHAR_EMPTY;
+				game->map.tile[i][j] = C_EM;
 			}
 		}
 	}

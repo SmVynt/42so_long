@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:35:47 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:21:08 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	ft_check_reach(t_gamestate *game)
 		i = -1;
 		while (++i < game->map.w)
 		{
-			if (map_reach.tile[i][j] == 'C' || map_reach.tile[i][j] == 'E')
+			if (map_reach.tile[i][j] == C_CL || map_reach.tile[i][j] == C_EX)
 				ft_exit("Map is not reachable\n");
 		}
 	}
@@ -115,5 +115,4 @@ void	ft_check_map(t_gamestate *game)
 	printf("Map counts checked\n");
 	ft_check_reach(game);
 	printf("Map reachability checked\n");
-	// ft_init_collectibles(game);
 }
