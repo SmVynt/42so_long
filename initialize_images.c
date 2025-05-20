@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:15:25 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 00:12:12 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	ft_init_images(t_gamestate *game)
 	ft_init_tileset(game);
 	ft_init_set(PATH_DECOR_8, game->textures.decor_8, game);
 	ft_init_set(PATH_DECOR_16, game->textures.decor_16, game);
+	ft_init_set(PATH_DIGITS, game->textures.digits, game);
 	ft_init_animations(game);
 }

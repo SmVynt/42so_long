@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 22:42:27 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 00:31:38 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	ft_createhooks(&game);
 	ft_init_images(&game);
 	ft_fill_tilemap(&game);
+	ft_update_count(&game);
 	printf("Map filled\n");
 	mlx_loop(game.mlx);
 	ft_exit_error("Error\nMiniLibX looping error.\n");

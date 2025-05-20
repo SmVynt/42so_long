@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 21:35:54 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 00:30:13 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static void	ft_update_state(t_gamestate *game)
 			if (game->state == STATE_ENEMIES)
 				game->state = STATE_CALC2;
 			else if (game->state == STATE_HERO)
+			{
+				game->steps++;
+				ft_update_count(game);
 				game->state = STATE_CALC;
+			}
 		}
 	}
 	else if (game->state == STATE_CALC2)
@@ -37,6 +41,7 @@ int	ft_update(t_gamestate *game)
 	ft_update_exit(game);
 	ft_update_enemies(game);
 	ft_update_hero(game);
+	//ft_update_count(game);
 	ft_override_images(&game->img.render_sm, &game->img.bg, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.decor, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.en, mk_vec(0, 0), 0);

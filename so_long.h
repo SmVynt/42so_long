@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:26:23 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 00:21:58 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define PATH_EXIT_OP "./textures/exit_open.xpm"
 # define PATH_CRYSTAL "./textures/crystal.xpm"
 # define PATH_CRYSTAL_TAKE "./textures/crystal_take.xpm"
+# define PATH_DIGITS "./textures/t_digits_x2.xpm"
 
 # define C_WL '1'
 # define C_EM '0'
@@ -121,6 +122,7 @@ typedef struct s_textures
 	t_texture	erasor_sm;
 	t_texture	decor_8[16];
 	t_texture	decor_16[16];
+	t_texture	digits[10];
 	t_texture	temp;
 }	t_textures;
 
@@ -246,6 +248,7 @@ void	ft_update_enemies(t_gamestate *game);
 void	ft_update_hero(t_gamestate *game);
 void	ft_update_objs(t_gamestate *game);
 void	ft_update_exit(t_gamestate *game);
+void	ft_update_count(t_gamestate *game);
 
 void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy);
 

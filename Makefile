@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/20 20:35:19 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/21 00:21:02 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS = \
 		render_animation.c \
 		render_images.c \
 		render_scale.c \
+		update_count.c \
 		update_enemies.c \
 		update_hero.c \
 		update_objs.c \
@@ -84,6 +85,7 @@ norm:
 		render_animation.c \
 		render_scale.c \
 		render_images.c \
+		update_count.c \
 		update_enemies.c \
 		update_hero.c \
 		update_objs.c \
