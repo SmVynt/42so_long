@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 21:35:18 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 01:16:06 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_checkinput(int argc, char **argv)
 	if (argc != 2 || ft_strlen(argv[1]) < 5
 		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 	{
-		ft_exit("Error\nPlease run the game with this command:\
+		ft_exit("Please run the game with this command:\
 			\n./so_long maps/<mapname.ber>\n");
 	}
 }
@@ -49,6 +49,21 @@ static void	ft_fill_map(t_gamestate *game, int fd)
 		i++;
 		buffer_size = read(fd, &buffer, 1);
 	}
+}
+
+void	ft_restart(t_gamestate *game)
+{
+	ft_init_hero(game);
+	ft_init_enemies(game);
+	ft_init_objs(game);
+	game->state = STATE_IDLE;
+	game->turn = 0.0f;
+	game->steps = 0;
+	game->collected = 0;
+	game->exit.active = 0;
+	ft_clean_texture(&game->img.fg);
+	ft_update_count(game);
+	ft_init_animations(game);
 }
 
 void	ft_initialize(t_gamestate *game, char **argv)

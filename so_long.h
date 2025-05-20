@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 00:21:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 01:02:14 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define STATE_DEATH 2
 # define STATE_HERO 3
 # define STATE_ENEMIES 4
+# define STATE_FINAL 5
 # define STATE_CALC 8
 # define STATE_CALC2 9
 
@@ -237,6 +238,7 @@ void	ft_init_set(char *path, t_texture *texture, t_gamestate *game);
 void	ft_init_hero(t_gamestate *game);
 void	ft_init_enemies(t_gamestate *game);
 void	ft_init_objs(t_gamestate *game);
+void	ft_restart(t_gamestate *game);
 void	ft_initialize(t_gamestate *game, char **argv);
 
 void	ft_check_map(t_gamestate *game);

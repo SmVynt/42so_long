@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:12:27 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 00:57:19 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_init_hero(t_gamestate *game)
 			{
 				game->hero.x = i * TS;
 				game->hero.y = j * TS;
-				game->map.tile[i][j] = C_EM;
+				//game->map.tile[i][j] = C_EM;
 			}
 		}
 	}

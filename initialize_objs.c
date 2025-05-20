@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:27:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 01:12:35 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	ft_init_enemies(t_gamestate *game)
 	int	i;
 
 	i = 0;
-	game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
+	if (!game->enemies)
+		game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
 	if (!game->enemies)
 		ft_exit_error("Could not allocate memory for enemies\n");
 	x = -1;
@@ -73,7 +74,8 @@ void	ft_init_objs(t_gamestate *game)
 	int	i;
 
 	i = 0;
-	game->collects = malloc(sizeof(t_collect) * game->c.collectibles);
+	if (!game->collects)
+		game->collects = malloc(sizeof(t_collect) * game->c.collectibles);
 	if (!game->collects)
 		ft_exit_error("Could not allocate memory for collectibles\n");
 	x = -1;
