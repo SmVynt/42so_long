@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:01 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:48:38 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ t_vec	mk_vec(int x, int y)
 	v.x = x;
 	v.y = y;
 	return (v);
+}
+
+int	ft_sum(int a, int b)
+{
+	return (a + b);
 }
 
 int	ft_lerp_int(int a, int b, float t)

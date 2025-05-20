@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:20:46 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 20:57:52 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,35 @@ static void	ft_init_collect(t_gamestate *game, int *i, int x, int y)
 	(*i) += 1;
 }
 
+void	ft_init_enemies(t_gamestate *game)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	i = 0;
+	game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
+	if (!game->enemies)
+		ft_exit_error("Could not allocate memory for enemies\n");
+	x = -1;
+	while (++x < game->map.w)
+	{
+		y = -1;
+		while (++y < game->map.h)
+		{
+			if (game->map.tile[x][y] == C_EN)
+				ft_init_enemy(game, &i, x, y);
+		}
+	}
+}
+
 void	ft_init_objs(t_gamestate *game)
 {
 	int	x;
 	int	y;
-	int	ie;
-	int	ic;
+	int	i;
 
-	ie = 0;
-	game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
-	if (!game->enemies)
-		ft_exit_error("Could not allocate memory for enemies\n");
+	i = 0;
 	game->collects = malloc(sizeof(t_collect) * game->c.collectibles);
 	if (!game->collects)
 		ft_exit_error("Could not allocate memory for collectibles\n");
@@ -55,10 +73,16 @@ void	ft_init_objs(t_gamestate *game)
 		y = -1;
 		while (++y < game->map.h)
 		{
-			if (game->map.tile[x][y] == C_EN)
-				ft_init_enemy(game, &ie, x, y);
 			if (game->map.tile[x][y] == C_CL)
-				ft_init_collect(game, &ic, x, y);
+				ft_init_collect(game, &i, x, y);
+			if (game->map.tile[x][y] == C_EX)
+			{
+				game->exit.x = x * TS;
+				game->exit.y = y * TS;
+				game->exit.state = STATE_IDLE;
+				game->exit.active = 0;
+				game->map.tile[x][y] = '0';
+			}
 		}
 	}
 }

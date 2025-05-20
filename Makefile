@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/20 20:11:45 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/20 20:35:19 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,15 @@ SRCS = \
 		initialize_map.c \
 		initialize_objs.c \
 		initialize_images.c \
-		initialize_sets.c \
 		initialize_hero.c \
 		initialize_hooks.c \
+		initialize_tilemap.c \
 		render_animation.c \
 		render_images.c \
 		render_scale.c \
 		update_enemies.c \
 		update_hero.c \
+		update_objs.c \
 		update_loop.c \
 		utils_1.c \
 		utils_2.c \
@@ -77,14 +78,15 @@ norm:
 		initialize_map.c \
 		initialize_objs.c \
 		initialize_images.c \
-		initialize_sets.c \
 		initialize_hero.c \
 		initialize_hooks.c \
+		initialize_tilemap.c \
 		render_animation.c \
 		render_scale.c \
 		render_images.c \
 		update_enemies.c \
 		update_hero.c \
+		update_objs.c \
 		update_loop.c \
 		utils_1.c \
 		utils_2.c \

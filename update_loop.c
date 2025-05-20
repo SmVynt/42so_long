@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:44 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:35:54 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ static void	ft_update_state(t_gamestate *game)
 int	ft_update(t_gamestate *game)
 {
 	ft_update_state(game);
+	ft_update_objs(game);
+	ft_update_exit(game);
 	ft_update_enemies(game);
 	ft_update_hero(game);
 	ft_override_images(&game->img.render_sm, &game->img.bg, mk_vec(0, 0), 0);
+	ft_cover_images(&game->img.render_sm, &game->img.decor, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.en, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.fg, mk_vec(0, 0), 0);
 	ft_scale_image_ca(&game->img.render_sm, &game->img.render);

@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:11:21 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:50:45 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_anim_list
 	t_animation	*current;
 	t_animation	idle;
 	t_animation	move;
-	t_animation	transition;
+	t_animation	change;
 	t_animation	idle2;
 }	t_anim_list;
 
@@ -110,8 +110,10 @@ typedef struct s_textures
 	t_texture	enemy_death[4];
 	t_texture	coll_idle[4];
 	t_texture	coll_take[4];
+	t_texture	coll_idle2[4];
 	t_texture	exit_idle[4];
-	t_texture	exit_open[4];
+	t_texture	exit_open[5];
+	t_texture	exit_idle2[4];
 	t_texture	erasor;
 	t_texture	erasor_sm;
 	t_texture	decor_8[16];
@@ -207,6 +209,7 @@ typedef struct s_gamestate
 	t_exit		exit;
 	t_enemy		*enemies;
 	t_collect	*collects;
+	int			collected;
 	t_hero		hero;
 	t_count		c;
 	t_textures	textures;
@@ -227,6 +230,7 @@ void	ft_init_tileset(t_gamestate *game);
 void	ft_init_texture(t_texture *texture, t_gamestate *game, int w, int h);
 void	ft_init_set(char *path, t_texture *texture, t_gamestate *game);
 void	ft_init_hero(t_gamestate *game);
+void	ft_init_enemies(t_gamestate *game);
 void	ft_init_objs(t_gamestate *game);
 void	ft_initialize(t_gamestate *game, char **argv);
 
@@ -237,6 +241,8 @@ void	ft_fill_tilemap(t_gamestate *game);
 int		ft_update(t_gamestate *game);
 void	ft_update_enemies(t_gamestate *game);
 void	ft_update_hero(t_gamestate *game);
+void	ft_update_objs(t_gamestate *game);
+void	ft_update_exit(t_gamestate *game);
 
 void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy);
 

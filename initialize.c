@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:36:32 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 21:35:18 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ void	ft_initialize(t_gamestate *game, char **argv)
 	close(fd);
 	ft_check_map(game);
 	ft_init_hero(game);
+	ft_init_enemies(game);
 	ft_init_objs(game);
 	game->state = STATE_CALC;
 	game->turn = 0.0f;
+	game->steps = 0;
+	game->collected = 0;
+	game->exit.active = 0;
 }
