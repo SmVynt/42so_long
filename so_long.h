@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 21:50:45 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 23:26:23 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_texture
 	int		h;
 }	t_texture;
 
+typedef struct s_animation	t_animation;
+
 typedef struct s_animation
 {
 	t_texture	*src;
@@ -86,6 +88,7 @@ typedef struct s_animation
 	int			frame_count;
 	int			frame_time;
 	int			delta;
+	t_animation	*next;
 }	t_animation;
 
 typedef struct s_anim_list
@@ -247,9 +250,9 @@ void	ft_update_exit(t_gamestate *game);
 void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy);
 
 void	ft_next_frame_to_img(t_texture *target,
-			t_animation *anim, t_vec v, int f);
+			t_anim_list *anim_list, t_vec v, int f);
 void	ft_next_frame_to_img_cover(t_texture *target,
-			t_animation *anim, t_vec v, int f);
+			t_anim_list *anim_list, t_vec v, int f);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);

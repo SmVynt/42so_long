@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 22:43:05 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 23:27:02 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_update_objs(t_gamestate *game)
 	int			i;
 	t_collect	*col;
 
-	i = 0;
-	while (i < game->c.collectibles)
+	i = -1;
+	while (++i < game->c.collectibles)
 	{
 		col = &game->collects[i];
 		if (game->state == STATE_CALC && col->active == 1
@@ -34,11 +34,10 @@ void	ft_update_objs(t_gamestate *game)
 				game->exit.active = 1;
 			}
 		}
-		ft_next_frame_to_img(&game->img.decor, col->anim.current,
+		ft_next_frame_to_img(&game->img.decor, &col->anim,
 			mk_vec(col->x, col->y - 4), 0);
-		i++;
 	}
-	ft_next_frame_to_img_cover(&game->img.decor, game->exit.anim.current,
+	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
 		mk_vec(game->exit.x, game->exit.y), 0);
 }
 
@@ -53,6 +52,6 @@ void	ft_update_exit(t_gamestate *game)
 	{
 		ft_exit_game(game);
 	}
-	ft_next_frame_to_img_cover(&game->img.decor, game->exit.anim.current,
+	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
 		mk_vec(game->exit.x, game->exit.y), 0);
 }

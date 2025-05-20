@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/16 00:30:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 23:00:06 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	ft_update_hero(t_gamestate *game)
 	}
 	else if (game->state == STATE_HERO)
 		ft_update_hero_move(game, hero);
-	ft_next_frame_to_img(&game->img.fg, game->hero.anim.current,
+	ft_next_frame_to_img(&game->img.fg, &game->hero.anim,
 		mk_vec(game->hero.x, game->hero.y - 12), game->hero.flipped);
 }

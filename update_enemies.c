@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:13:21 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 22:55:22 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_update_enemies(t_gamestate *game)
 			ft_enemy_search(game, enemy);
 		if (game->state == STATE_ENEMIES && enemy->state == STATE_MOVE)
 			ft_update_enemy_move(game, enemy);
-		ft_next_frame_to_img_cover(&game->img.en, enemy->anim.current,
+		ft_next_frame_to_img_cover(&game->img.en, &enemy->anim,
 			mk_vec(enemy->x, enemy->y - 6), enemy->flipped);
 		i++;
 	}

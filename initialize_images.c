@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:23:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 23:15:25 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,6 @@ void	ft_init_texture(t_texture *texture, t_gamestate *game,
 	texture->src = mlx_new_image(game->mlx, w, h);
 	if (!texture->src)
 		ft_exit_error("Error\nCould not create new texture\n");
-}
-
-void	ft_init_animation(char *path,
-	t_texture *texture, t_animation *anim, t_gamestate *game)
-{
-	int	i;
-	int	fc;
-
-	i = 0;
-	ft_init_image(path, &game->textures.temp, game);
-	fc = game->textures.temp.h / game->textures.temp.w;
-	while (i < fc)
-	{
-		ft_init_texture(&texture[i], game,
-			game->textures.temp.w, game->textures.temp.w);
-		ft_override_images(&texture[i], &game->textures.temp,
-			mk_vec(0, -(i * game->textures.temp.w)), 0);
-		i++;
-	}
-	anim->frame = 0;
-	anim->frame_count = fc;
-	anim->frame_time = FRAME_TIME;
-	anim->delta = FRAME_TIME;
-	anim->src = texture;
 }
 
 void	ft_init_images(t_gamestate *game)

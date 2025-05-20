@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:57:52 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/20 23:27:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ static void	ft_init_collect(t_gamestate *game, int *i, int x, int y)
 	game->collects[*i].active = 1;
 	game->collects[*i].state = STATE_IDLE;
 	(*i) += 1;
+}
+
+static void	ft_init_exit(t_gamestate *game, int x, int y)
+{
+	game->exit.x = x * TS;
+	game->exit.y = y * TS;
+	game->exit.state = STATE_IDLE;
+	game->exit.active = 0;
+	game->map.tile[x][y] = C_EM;
 }
 
 void	ft_init_enemies(t_gamestate *game)
@@ -76,13 +85,7 @@ void	ft_init_objs(t_gamestate *game)
 			if (game->map.tile[x][y] == C_CL)
 				ft_init_collect(game, &i, x, y);
 			if (game->map.tile[x][y] == C_EX)
-			{
-				game->exit.x = x * TS;
-				game->exit.y = y * TS;
-				game->exit.state = STATE_IDLE;
-				game->exit.active = 0;
-				game->map.tile[x][y] = '0';
-			}
+				ft_init_exit(game, x, y);
 		}
 	}
 }
