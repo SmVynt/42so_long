@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 00:45:19 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/21 03:07:28 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ int	ft_update(t_gamestate *game)
 	ft_cover_images(&game->img.render_sm, &game->img.fg, mk_vec(0, 0), 0);
 	ft_scale_image_ca(&game->img.render_sm, &game->img.render);
 	mlx_put_image_to_window(game->mlx, game->window,
-		game->img.render.src, 0, 0);
+		game->img.render_sm.src, 0, 0);
 	return (0);
 }
