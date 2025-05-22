@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 21:11:55 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 21:13:58 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,4 @@ void	ft_fill_tilemap(t_gamestate *game)
 		y++;
 	}
 	ft_add_decor(game);
-	ft_printf("done\n");
 }

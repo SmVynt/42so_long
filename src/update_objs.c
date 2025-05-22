@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 18:23:53 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 21:32:52 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_update_exit(t_gamestate *game)
 		&& exit->x / TS == game->hero.x_next
 		&& exit->y / TS == game->hero.y_next)
 	{
-		ft_exit_game(game);
+		game->state = STATE_WON;
 	}
 	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
 		mk_vec(game->exit.x, game->exit.y), 0);
@@ -58,16 +58,22 @@ void	ft_update_exit(t_gamestate *game)
 
 void	ft_update_end(t_gamestate *game)
 {
+	int		x;
+	int		y;
 	if (game->state == STATE_WON)
 	{
-		ft_override_images(&game->img.render_sm,
-			&game->textures.screen_won, mk_vec(0, 0), 0);
+		x = (game->map.w * TS - game->textures.screen_won.w) / 2;
+		y = (game->map.h * TS - game->textures.screen_won.h) / 2;
+		ft_cover_images(&game->img.fg,
+			&game->textures.screen_won, mk_vec(x, y), 0);
 		game->state = STATE_FINAL;
 	}
-	else if (game->state == STATE_WON)
+	else if (game->state == STATE_LOST)
 	{
-		ft_override_images(&game->img.render_sm,
-			&game->textures.screen_lost, mk_vec(0, 0), 0);
+		x = (game->map.w * TS - game->textures.screen_won.w) / 2;
+		y = (game->map.h * TS - game->textures.screen_won.h) / 2;
+		ft_cover_images(&game->img.fg,
+			&game->textures.screen_lost, mk_vec(x, y), 0);
 		game->state = STATE_FINAL;
 	}
 }
