@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 21:11:10 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 00:56:32 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_init_exit(t_gamestate *game, int x, int y)
 	game->exit.y = y * TS;
 	game->exit.state = STATE_IDLE;
 	game->exit.active = 0;
-	game->map.tile[x][y] = C_EM;
+	game->map.tile[x][y] = C_E;
 }
 
 void	ft_init_enemies(t_gamestate *game)
@@ -49,9 +49,11 @@ void	ft_init_enemies(t_gamestate *game)
 
 	if (game->c.enemies <= 0)
 		return ;
-	game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
+	if (game->alloc.enemies == 0)
+		game->enemies = malloc(sizeof(t_enemy) * game->c.enemies);
 	if (!game->enemies)
 		ft_exit_error("Could not allocate memory for enemies\n");
+	game->alloc.enemies = 1;
 	x = -1;
 	i = 0;
 	while (++x < game->map.w)
@@ -63,8 +65,6 @@ void	ft_init_enemies(t_gamestate *game)
 			{
 				ft_init_enemy(&game->enemies[i], x, y);
 				i++;
-				if (i >= game->c.enemies)
-					return ;
 			}
 		}
 	}
@@ -76,21 +76,19 @@ void	ft_init_objs(t_gamestate *game)
 	int	y;
 	int	i;
 
-	if (game->c.collectibles > 0)
-	{
+	if (game->alloc.collects == 0)
 		game->collects = malloc(sizeof(t_collect) * game->c.collectibles);
-		if (!game->collects)
-			ft_exit_error("Could not allocate memory for collectibles\n");
-	}
+	if (!game->collects)
+		ft_exit_error("Could not allocate memory for collectibles\n");
+	game->alloc.collects = 1;
 	x = -1;
 	i = 0;
-	ft_printf("%d Collectibles initialized\n", game->c.collectibles);
 	while (++x < game->map.w)
 	{
 		y = -1;
 		while (++y < game->map.h)
 		{
-			if (game->map.tile[x][y] == C_CL)
+			if (game->map.tile[x][y] == C_C)
 			{
 				if (i < game->c.collectibles)
 					ft_init_collect(&game->collects[i++], x, y);

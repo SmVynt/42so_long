@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 18:37:44 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:16:24 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define MAX_ENEMIES 20
-# define MAX_COLLECT 30
-# define MAX_WIDTH 200
-# define MAX_HEIGHT 80
+# define COLOR_R "\033[31m"
+# define COLOR_G "\033[32m"
+# define COLOR_Y "\033[33m"
+# define COLOR_B "\033[34m"
+# define COLOR_M "\033[35m"
+# define COLOR_C "\033[36m"
+# define COLOR_W "\033[37m"
+# define COLOR_BOLD "\033[1m"
+# define COLOR_X "\033[0m"
+
 # define TS 32
 # define SCALE 3
 # define FRAME_TIME 4
@@ -59,11 +65,11 @@
 # define PATH_SCREEN_WON "./textures/screen_won.xpm"
 # define PATH_SCREEN_LOST "./textures/screen_lost.xpm"
 
-# define C_WL '1'
-# define C_EM '0'
-# define C_PL 'P'
+# define C_W '1'
+# define C_E '0'
+# define C_P 'P'
 # define C_EN 'X'
-# define C_CL 'C'
+# define C_C 'C'
 # define C_EX 'E'
 
 typedef struct s_vec
@@ -76,8 +82,7 @@ typedef struct s_map
 {
 	int		w;
 	int		h;
-	char	tile[MAX_WIDTH + 1][MAX_HEIGHT + 1];
-//	char	**tile;
+	char	**tile;
 	int		checked;
 }	t_map;
 
@@ -194,6 +199,13 @@ typedef struct s_count
 	int	enemies;
 }	t_count;
 
+typedef struct s_alloc
+{
+	int		map;
+	int		enemies;
+	int		collects;
+}	t_alloc;
+
 typedef struct s_imgdt
 {
 	int		bpp;
@@ -227,6 +239,7 @@ typedef struct s_gamestate
 	int			collected;
 	t_hero		hero;
 	t_count		c;
+	t_alloc		alloc;
 	t_textures	textures;
 }	t_gamestate;
 
@@ -285,7 +298,7 @@ int		get_a(int rgba);
 t_imgdt	get_img_data(void *img);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-//size_t	ft_strlen(const char *a);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 t_vec	mk_vec(int x, int y);
 int		ft_lerp_int(int a, int b, float t);
 float	ft_lerp(float a, float b, float t);
@@ -294,6 +307,10 @@ int		ft_random(int min, int max);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_dir(int a, int b);
+char	*ft_strip_from_n(char *str);
+t_map	*ft_copy_map(t_map *src);
+void	ft_free_map(t_map *map);
+void	ft_allocate_map(t_map *map);
 
 void	ft_update_end(t_gamestate *game);
 

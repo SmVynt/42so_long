@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 21:32:52 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 00:44:31 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_update_end(t_gamestate *game)
 {
 	int		x;
 	int		y;
+
 	if (game->state == STATE_WON)
 	{
 		x = (game->map.w * TS - game->textures.screen_won.w) / 2;

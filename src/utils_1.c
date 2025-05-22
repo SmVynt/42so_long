@@ -6,31 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:19 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:25:40 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_exit_error(char *str)
-{
-	write(1, "Error\n", 6);
-	perror(str);
-	exit(EXIT_FAILURE);
-}
-
-void	ft_exit(char *str)
-{
-	write(1, "Error\n", 6);
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}
-	exit(EXIT_FAILURE);
-}
-
-int	ft_exit_game(t_gamestate *game)
+static void ft_clean(t_gamestate *game)
 {
 	if (game->mlx)
 	{
@@ -41,42 +23,62 @@ int	ft_exit_game(t_gamestate *game)
 		free(game->enemies);
 	if (game->collects)
 		free(game->collects);
+	ft_free_map(&game->map);
+}
+
+void	ft_exit_error(char *str, t_gamestate *game)
+{
+	ft_printf(COLOR_R "Error\n" COLOR_X);
+	perror(str);
+	ft_clean(game);
+	exit(EXIT_FAILURE);
+}
+
+void	ft_exit(char *str, t_gamestate *game)
+{
+	ft_printf(COLOR_R "Error\n" COLOR_X);
+	ft_printf("%s", str);
+	ft_clean(game);
+	exit(EXIT_FAILURE);
+}
+
+int	ft_exit_game(t_gamestate *game)
+{
+	// if (game->mlx)
+	// {
+	// 	mlx_destroy_window(game->mlx, game->window);
+	// 	free(game->mlx);
+	// }
+	// if (game->enemies)
+	// 	free(game->enemies);
+	// if (game->collects)
+	// 	free(game->collects);
+	// ft_free_map(&game->map);
+	ft_clean(game);
 	exit(0);
 	return (game->steps);
 }
 
-static void	ft_check_neighbour(t_map *map, int i, int j, char start)
+char	*ft_strip_from_n(char *str)
 {
-	if (!(map->tile[i][j] == '1' || map->tile[i][j] == start))
-	{
-		map->tile[i][j] = start;
-		map->checked = 0;
-	}
-}
+	char	*new_str;
+	int		len;
 
-void	ft_flood_fill(t_map *map, char start)
-{
-	int	i;
-	int	j;
-
-	map->checked = 0;
-	while (map->checked == 0)
+	len = 0;
+	if (!str)
+		return (NULL);
+	if (str[0] == '\n')
 	{
-		map->checked = 1;
-		i = 0;
-		while (++i < map->w - 1)
-		{
-			j = 0;
-			while (++j < map->h - 1)
-			{
-				if (map->tile[i][j] == start)
-				{
-					ft_check_neighbour(map, i + 1, j, start);
-					ft_check_neighbour(map, i - 1, j, start);
-					ft_check_neighbour(map, i, j + 1, start);
-					ft_check_neighbour(map, i, j - 1, start);
-				}
-			}
-		}
+		free(str);
+		return (NULL);
 	}
+	while (str[len] && str[len] != '\n')
+		len++;
+	new_str = malloc(sizeof(char) * (len + 1));
+	if (!new_str)
+		return (NULL);
+	ft_strlcpy(new_str, str, (len + 1));
+	new_str[len] = '\0';
+	free(str);
+	return (new_str);
 }

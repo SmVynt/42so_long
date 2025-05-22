@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 01:16:06 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:08:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,55 @@ void	ft_checkinput(int argc, char **argv)
 	}
 }
 
-static void	ft_fill_map(t_gamestate *game, int fd)
+static void	ft_calculate_map_size(t_gamestate *game, char *src)
 {
-	int		buffer_size;
-	char	buffer;
-	int		i;
+	int		fd;
+	char	*line;
 
-	buffer_size = read(fd, &buffer, 1);
-	game->map.w = 1;
-	game->map.h = 1;
-	i = 0;
-	while (buffer_size > 0)
+	fd = open (src, O_RDONLY);
+	if (fd < 0)
+		ft_exit_error("Error\nCould not open the map file\n");
+	line = ft_strip_from_n(get_next_line(fd));
+	if (!line)
+		ft_exit("Map is empty\n");
+	game->map.w = (int)ft_strlen(line);
+	game->map.h = 0;
+	while (line)
 	{
-		if (i > MAX_WIDTH || game->map.h > MAX_HEIGHT)
-			ft_exit("Map is too large\n");
-		game->map.tile[i][game->map.h - 1] = buffer;
-		if (buffer == '\n')
-		{
-			game->map.h++;
-			if (game->map.w == 1)
-				game->map.w = i;
-			else if (i != game->map.w)
-				ft_exit("Map is not rectangular\n");
-			i = -1;
-		}
-		i++;
-		buffer_size = read(fd, &buffer, 1);
+		if (ft_strlen(line) != (size_t)game->map.w)
+			ft_exit("Map is not rectangular\n");
+		free(line);
+		line = ft_strip_from_n(get_next_line(fd));
+		game->map.h++;
 	}
+	close(fd);
+	if (game->map.w < 3 || game->map.h < 3)
+		ft_exit("Map is too small\n");
+}
+
+static void	ft_fill_map(t_gamestate *game, char *src)
+{
+	int		fd;
+	int		i;
+	int		j;
+	char	*line;
+
+	ft_allocate_map(&game->map);
+	fd = open (src, O_RDONLY);
+	if (fd < 0)
+		ft_exit_error("Error\nCould not open the map file\n");
+	line = ft_strip_from_n(get_next_line(fd));
+	i = 0;
+	while (line)
+	{
+		j = -1;
+		while (++j < game->map.w)
+			game->map.tile[j][i] = line[j];
+		free(line);
+		line = ft_strip_from_n(get_next_line(fd));
+		i++;
+	}
+	game->alloc.map = 1;
 }
 
 void	ft_restart(t_gamestate *game)
@@ -68,13 +90,11 @@ void	ft_restart(t_gamestate *game)
 
 void	ft_initialize(t_gamestate *game, char **argv)
 {
-	int	fd;
-
-	fd = open (argv[1], O_RDONLY);
-	if (fd < 0)
-		ft_exit_error("Error\nCould not open the map file\n");
-	ft_fill_map(game, fd);
-	close(fd);
+	game->alloc.map = 0;
+	game->alloc.enemies = 0;
+	game->alloc.collects = 0;
+	ft_calculate_map_size(game, argv[1]);
+	ft_fill_map(game, argv[1]);
 	ft_check_map(game);
 	ft_init_hero(game);
 	ft_init_enemies(game);

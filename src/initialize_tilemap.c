@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 21:13:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:08:28 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ static void	ft_add_decor(t_gamestate *game)
 		j = -1;
 		while (++j < game->map.h)
 		{
-			if (game->map.tile[i][j] == C_WL)
+			if (game->map.tile[i][j] == C_W)
 				ft_place_decor(game, game->textures.decor_8,
 					mk_vec(i * TS, j * TS), mk_vec(8, 15));
-			if (game->map.tile[i][j] == C_EM)
+			if (game->map.tile[i][j] == C_E)
 			{
 				ft_place_decor(game, game->textures.decor_8,
 					mk_vec(i * TS, j * TS), mk_vec(0, 7));
@@ -99,16 +99,14 @@ void	ft_fill_tilemap(t_gamestate *game)
 		while (x < game->map.w - 1)
 		{
 			fill = 0;
-			fill += (game->map.tile[x][y] == C_WL) * 1;
-			fill += (game->map.tile[x + 1][y] == C_WL) * 2;
-			fill += (game->map.tile[x][y + 1] == C_WL) * 4;
-			fill += (game->map.tile[x + 1][y + 1] == C_WL) * 8;
-			ft_printf("%d ", fill);
+			fill += (game->map.tile[x][y] == C_W) * 1;
+			fill += (game->map.tile[x + 1][y] == C_W) * 2;
+			fill += (game->map.tile[x][y + 1] == C_W) * 4;
+			fill += (game->map.tile[x + 1][y + 1] == C_W) * 8;
 			ft_override_images(&game->img.bg, &game->textures.tiles[fill],
 				mk_vec(x * TS + TS / 2, y * TS + TS / 2), 0);
 			x++;
 		}
-		ft_printf("\n");
 		y++;
 	}
 	ft_add_decor(game);

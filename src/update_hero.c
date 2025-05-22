@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 21:12:25 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 00:39:30 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_start_hero_move(t_gamestate *game, t_hero *hero)
 	wish_y = hero->wish_y * (hero->wish_x == 0);
 	tile = game->map.tile[(hero->x + hero->wish_x * TS) / TS]
 	[(hero->y + wish_y * TS) / TS];
-	if (tile != C_WL)
+	if (tile != C_W)
 	{
 		hero->x_prev = hero->x / TS;
 		hero->y_prev = hero->y / TS;
