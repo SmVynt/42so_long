@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 00:51:13 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 17:10:40 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 	if (e.x == h.x || e.y == h.y)
 	{
 		if (e.x == h.x && e.y == h.y)
-			return (game->state = STATE_FINAL, 0);
+			return (game->state = STATE_LOST, 0);
 		if (ft_check_reach(game, mk_vec(e.x, e.y), mk_vec(h.x, h.y)) == 0)
 			return (0);
 		enemy->flipped = 0;

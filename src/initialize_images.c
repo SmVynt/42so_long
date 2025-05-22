@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 00:12:12 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 18:23:22 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_init_image(char *path, t_texture *texture, t_gamestate *game)
 	int	w;
 	int	h;
 
-	printf("Loading %s\n", path);
+	ft_printf("Loading %s\n", path);
 	texture->src = mlx_xpm_file_to_image(game->mlx, path, &w, &h);
 	if (!texture->src)
 		ft_exit_error("Error\nCould not load that image\n");
 	texture->w = w;
 	texture->h = h;
-	printf("Image loaded\n");
+	ft_printf("Image loaded\n");
 }
 
 void	ft_init_texture(t_texture *texture, t_gamestate *game,
@@ -53,5 +53,7 @@ void	ft_init_images(t_gamestate *game)
 	ft_init_set(PATH_DECOR_8, game->textures.decor_8, game);
 	ft_init_set(PATH_DECOR_16, game->textures.decor_16, game);
 	ft_init_set(PATH_DIGITS, game->textures.digits, game);
+	ft_init_image(PATH_SCREEN_WON, &game->textures.screen_won, game);
+	ft_init_image(PATH_SCREEN_LOST, &game->textures.screen_lost, game);
 	ft_init_animations(game);
 }

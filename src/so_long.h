@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 01:02:14 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 18:37:44 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SO_LONG_H
 
 # include "mlx/mlx.h"
+# include "lbs/gnl/get_next_line.h"
+# include "lbs/printf/ft_printf.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -27,7 +29,7 @@
 # define SCALE 3
 # define FRAME_TIME 4
 # define MOVE_SPEED 0.2f
-# define GAME_LERP 0.5f
+# define GAME_LERP 0.45f
 
 # define STATE_IDLE 0
 # define STATE_MOVE 1
@@ -35,6 +37,8 @@
 # define STATE_HERO 3
 # define STATE_ENEMIES 4
 # define STATE_FINAL 5
+# define STATE_WON 6
+# define STATE_LOST 7
 # define STATE_CALC 8
 # define STATE_CALC2 9
 
@@ -52,6 +56,8 @@
 # define PATH_CRYSTAL "./textures/crystal.xpm"
 # define PATH_CRYSTAL_TAKE "./textures/crystal_take.xpm"
 # define PATH_DIGITS "./textures/t_digits_x2.xpm"
+# define PATH_SCREEN_WON "./textures/screen_won.xpm"
+# define PATH_SCREEN_LOST "./textures/screen_lost.xpm"
 
 # define C_WL '1'
 # define C_EM '0'
@@ -71,6 +77,7 @@ typedef struct s_map
 	int		w;
 	int		h;
 	char	tile[MAX_WIDTH + 1][MAX_HEIGHT + 1];
+//	char	**tile;
 	int		checked;
 }	t_map;
 
@@ -124,6 +131,8 @@ typedef struct s_textures
 	t_texture	decor_8[16];
 	t_texture	decor_16[16];
 	t_texture	digits[10];
+	t_texture	screen_won;
+	t_texture	screen_lost;
 	t_texture	temp;
 }	t_textures;
 
@@ -276,7 +285,7 @@ int		get_a(int rgba);
 t_imgdt	get_img_data(void *img);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t	ft_strlen(const char *a);
+//size_t	ft_strlen(const char *a);
 t_vec	mk_vec(int x, int y);
 int		ft_lerp_int(int a, int b, float t);
 float	ft_lerp(float a, float b, float t);
@@ -285,5 +294,7 @@ int		ft_random(int min, int max);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_dir(int a, int b);
+
+void	ft_update_end(t_gamestate *game);
 
 #endif

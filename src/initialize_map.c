@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:21:08 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 21:09:46 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ static void	ft_check_characters(t_gamestate *game)
 		j = -1;
 		while (++j < game->map.h)
 		{
-			if (game->map.tile[i][j] == 'C')
+			if (game->map.tile[i][j] == C_CL)
 				game->c.collectibles++;
-			else if (game->map.tile[i][j] == 'E')
+			else if (game->map.tile[i][j] == C_EX)
 				game->c.exit++;
-			else if (game->map.tile[i][j] == 'P')
+			else if (game->map.tile[i][j] == C_PL)
 				game->c.start++;
-			else if (game->map.tile[i][j] == 'X')
+			else if (game->map.tile[i][j] == C_EN)
 				game->c.enemies++;
-			else if (game->map.tile[i][j] != '1' && game->map.tile[i][j] != '0')
+			else if (game->map.tile[i][j] != C_WL && game->map.tile[i][j] != C_EM)
 				ft_exit("Invalid character in map\n");
 		}
 	}
@@ -90,7 +90,7 @@ static void	ft_check_reach(t_gamestate *game)
 	map_reach.w = game->map.w;
 	map_reach.h = game->map.h;
 	ft_flood_fill(&map_reach, 'P');
-	printf("Map reachability filled\n");
+	ft_printf ("Map reachability filled\n");
 	j = -1;
 	while (++j < game->map.h)
 	{
@@ -108,11 +108,11 @@ void	ft_check_map(t_gamestate *game)
 	if (game->map.w < 3 || game->map.h < 3)
 		ft_exit("Map is too small\n");
 	ft_check_bounds(game);
-	printf("Map bounds checked\n");
+	ft_printf ("Map bounds checked\n");
 	ft_check_characters(game);
-	printf("Map characters checked\n");
+	ft_printf ("Map characters checked\n");
 	ft_check_count(game);
-	printf("Map counts checked\n");
+	ft_printf ("Map counts checked\n");
 	ft_check_reach(game);
-	printf("Map reachability checked\n");
+	ft_printf ("Map reachability checked\n");
 }

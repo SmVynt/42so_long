@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:27:02 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 18:23:53 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ void	ft_update_exit(t_gamestate *game)
 	}
 	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
 		mk_vec(game->exit.x, game->exit.y), 0);
+}
+
+void	ft_update_end(t_gamestate *game)
+{
+	if (game->state == STATE_WON)
+	{
+		ft_override_images(&game->img.render_sm,
+			&game->textures.screen_won, mk_vec(0, 0), 0);
+		game->state = STATE_FINAL;
+	}
+	else if (game->state == STATE_WON)
+	{
+		ft_override_images(&game->img.render_sm,
+			&game->textures.screen_lost, mk_vec(0, 0), 0);
+		game->state = STATE_FINAL;
+	}
 }

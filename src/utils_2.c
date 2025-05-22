@@ -6,21 +6,21 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:26:03 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/22 18:37:30 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-size_t	ft_strlen(const char *a)
-{
-	size_t	i;
+// size_t	ft_strlen(const char *a)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (a[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (a[i])
+// 		i++;
+// 	return (i);
+// }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
