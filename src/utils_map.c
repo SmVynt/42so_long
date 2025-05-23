@@ -6,13 +6,11 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:22:58 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:13:01 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 static void	ft_check_neighbour(t_map *map, int i, int j, char start)
 {
@@ -79,19 +77,19 @@ t_map	*ft_copy_map(t_map *src)
 	return (dst);
 }
 
-void	ft_allocate_map(t_map *map)
+void	ft_allocate_map(t_map *map, t_gamestate *game)
 {
 	int	i;
 
 	map->tile = malloc(sizeof(char *) * map->w);
 	if (!map->tile)
-		ft_exit("Error\nCould not allocate memory for map\n");
+		ft_exit("Error\nCould not allocate memory for map\n", game);
 	i = -1;
 	while (++i < map->w)
 	{
 		map->tile[i] = malloc(sizeof(char) * (map->h));
 		if (!map->tile[i])
-			ft_exit("Error\nCould not allocate memory for map\n");
+			ft_exit("Error\nCould not allocate memory for map\n", game);
 	}
 }
 

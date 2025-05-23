@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:16:24 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:45:48 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,11 +243,11 @@ typedef struct s_gamestate
 	t_textures	textures;
 }	t_gamestate;
 
-void	ft_exit_error(char *str);
-void	ft_exit(char *str);
+void	ft_exit_error(char *str, t_gamestate *game);
+void	ft_exit(char *str, t_gamestate *game);
 int		ft_exit_game(t_gamestate *game);
 void	ft_createhooks(t_gamestate *game);
-void	ft_checkinput(int argc, char **argv);
+void	ft_checkinput(int argc, char **argv, t_gamestate *game);
 
 void	ft_init_image(char *path, t_texture *texture, t_gamestate *game);
 void	ft_init_images(t_gamestate *game);
@@ -310,7 +310,7 @@ int		ft_dir(int a, int b);
 char	*ft_strip_from_n(char *str);
 t_map	*ft_copy_map(t_map *src);
 void	ft_free_map(t_map *map);
-void	ft_allocate_map(t_map *map);
+void	ft_allocate_map(t_map *map, t_gamestate *game);
 
 void	ft_update_end(t_gamestate *game);
 

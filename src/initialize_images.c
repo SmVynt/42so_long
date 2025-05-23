@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 18:23:22 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:43:34 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_init_image(char *path, t_texture *texture, t_gamestate *game)
 	int	w;
 	int	h;
 
-	ft_printf("Loading %s\n", path);
+	ft_printf("Loading %s ", path);
 	texture->src = mlx_xpm_file_to_image(game->mlx, path, &w, &h);
 	if (!texture->src)
-		ft_exit_error("Error\nCould not load that image\n");
+		ft_exit_error("Could not load that image\n", game);
 	texture->w = w;
 	texture->h = h;
-	ft_printf("Image loaded\n");
+	ft_printf(COLOR_G "Loaded\n" COLOR_X);
 }
 
 void	ft_init_texture(t_texture *texture, t_gamestate *game,
@@ -33,7 +33,7 @@ void	ft_init_texture(t_texture *texture, t_gamestate *game,
 	texture->h = h;
 	texture->src = mlx_new_image(game->mlx, w, h);
 	if (!texture->src)
-		ft_exit_error("Error\nCould not create new texture\n");
+		ft_exit_error("Error\nCould not create new texture\n", game);
 }
 
 void	ft_init_images(t_gamestate *game)

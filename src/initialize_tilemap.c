@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:08:28 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:22:47 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ static void	ft_place_decor(t_gamestate *game, t_texture *tex,
 		t_vec coords, t_vec range)
 {
 	int	num;
-	int	b;
+	int	max;
 
-	b = 8;
+	max = TS - game->textures.decor_8[0].w;
 	num = ft_random(range.x, range.y);
 	ft_cover_images(&game->img.bg, &tex[num],
-		mk_vec(coords.x + ft_random(b, TS - b) - 8,
-			coords.y + ft_random(b, TS - b) - 8),
+		mk_vec(coords.x + ft_random(0, max),
+			coords.y + ft_random(0, max)),
 		ft_random(0, 1));
 }
 
@@ -79,8 +79,9 @@ static void	ft_add_decor(t_gamestate *game)
 			{
 				ft_place_decor(game, game->textures.decor_8,
 					mk_vec(i * TS, j * TS), mk_vec(0, 7));
-				ft_place_decor(game, game->textures.decor_8,
-					mk_vec(i * TS, j * TS), mk_vec(0, 3));
+				if (ft_random(0, 3) == 0)
+					ft_place_decor(game, game->textures.decor_8,
+						mk_vec(i * TS, j * TS), mk_vec(0, 3));
 			}
 		}
 	}
