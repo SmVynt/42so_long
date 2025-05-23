@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:22:47 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_init_tileset(t_gamestate *game)
+void	ft_init_tileset(t_gs *game)
 {
 	int	i;
 	int	w;
@@ -29,7 +29,7 @@ void	ft_init_tileset(t_gamestate *game)
 	}
 }
 
-void	ft_init_set(char *path, t_texture *texture, t_gamestate *game)
+void	ft_init_set(char *path, t_texture *texture, t_gs *game)
 {
 	int	i;
 	int	count;
@@ -47,7 +47,7 @@ void	ft_init_set(char *path, t_texture *texture, t_gamestate *game)
 	}
 }
 
-static void	ft_place_decor(t_gamestate *game, t_texture *tex,
+static void	ft_place_decor(t_gs *game, t_texture *tex,
 		t_vec coords, t_vec range)
 {
 	int	num;
@@ -61,7 +61,7 @@ static void	ft_place_decor(t_gamestate *game, t_texture *tex,
 		ft_random(0, 1));
 }
 
-static void	ft_add_decor(t_gamestate *game)
+static void	ft_add_decor(t_gs *game)
 {
 	int	i;
 	int	j;
@@ -73,8 +73,10 @@ static void	ft_add_decor(t_gamestate *game)
 		while (++j < game->map.h)
 		{
 			if (game->map.tile[i][j] == C_W)
+			{
 				ft_place_decor(game, game->textures.decor_8,
 					mk_vec(i * TS, j * TS), mk_vec(8, 15));
+			}
 			if (game->map.tile[i][j] == C_E)
 			{
 				ft_place_decor(game, game->textures.decor_8,
@@ -87,7 +89,7 @@ static void	ft_add_decor(t_gamestate *game)
 	}
 }
 
-void	ft_fill_tilemap(t_gamestate *game)
+void	ft_fill_tilemap(t_gs *game)
 {
 	int	x;
 	int	y;

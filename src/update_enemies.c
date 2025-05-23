@@ -6,19 +6,19 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/22 17:10:40 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_update_enemy_move(t_gamestate *game, t_enemy *enemy)
+static void	ft_update_enemy_move(t_gs *game, t_enemy *enemy)
 {
 	enemy->x = ft_lerp_int(enemy->x_prev * TS, enemy->x_next * TS, game->turn);
 	enemy->y = ft_lerp_int(enemy->y_prev * TS, enemy->y_next * TS, game->turn);
 }
 
-static int	ft_check_reach(t_gamestate *game, t_vec a, t_vec b)
+static int	ft_check_reach(t_gs *game, t_vec a, t_vec b)
 {
 	int	x_max;
 	int	y_min;
@@ -42,7 +42,7 @@ static int	ft_check_reach(t_gamestate *game, t_vec a, t_vec b)
 	return (1);
 }
 
-static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
+static int	ft_enemy_search(t_gs *game, t_enemy *enemy)
 {
 	t_vec	e;
 	t_vec	h;
@@ -69,7 +69,7 @@ static int	ft_enemy_search(t_gamestate *game, t_enemy *enemy)
 	return (0);
 }
 
-static void	ft_enemy_calculation(t_gamestate *game, t_enemy *enemy)
+static void	ft_enemy_calculation(t_gs *game, t_enemy *enemy)
 {
 	game->turn = 0.0f;
 	enemy->x = enemy->x_next * TS;
@@ -80,7 +80,7 @@ static void	ft_enemy_calculation(t_gamestate *game, t_enemy *enemy)
 	ft_find_next_spot(game, enemy);
 }
 
-void	ft_update_enemies(t_gamestate *game)
+void	ft_update_enemies(t_gs *game)
 {
 	int		i;
 	t_enemy	*enemy;

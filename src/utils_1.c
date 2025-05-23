@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:12:49 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_clean(t_gamestate *game)
+static void	ft_clean(t_gs *game)
 {
 	if (game->mlx)
 	{
@@ -26,7 +26,7 @@ static void	ft_clean(t_gamestate *game)
 	ft_free_map(&game->map);
 }
 
-void	ft_exit_error(char *str, t_gamestate *game)
+void	ft_exit_error(char *str, t_gs *game)
 {
 	ft_printf(COLOR_R "Error\n" COLOR_Y);
 	perror(str);
@@ -35,7 +35,7 @@ void	ft_exit_error(char *str, t_gamestate *game)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exit(char *str, t_gamestate *game)
+void	ft_exit(char *str, t_gs *game)
 {
 	ft_printf(COLOR_R "Error\n" COLOR_Y);
 	ft_printf("%s" COLOR_X, str);
@@ -43,7 +43,7 @@ void	ft_exit(char *str, t_gamestate *game)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_exit_game(t_gamestate *game)
+int	ft_exit_game(t_gs *game)
 {
 	ft_clean(game);
 	exit(0);

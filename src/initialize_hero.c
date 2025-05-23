@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 00:40:02 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_init_hero(t_gamestate *game)
+void	ft_init_hero(t_gs *game)
 {
 	int	i;
 	int	j;

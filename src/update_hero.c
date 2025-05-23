@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 00:39:30 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_update_hero_move(t_gamestate *game, t_hero *hero)
+static void	ft_update_hero_move(t_gs *game, t_hero *hero)
 {
 	ft_override_images(&game->img.fg, &game->textures.erasor,
 		mk_vec(hero->x, hero->y - 12), 0);
@@ -20,7 +20,7 @@ static void	ft_update_hero_move(t_gamestate *game, t_hero *hero)
 	hero->y = ft_lerp_int(hero->y_prev * TS, hero->y_next * TS, game->turn);
 }
 
-static void	ft_start_hero_move(t_gamestate *game, t_hero *hero)
+static void	ft_start_hero_move(t_gs *game, t_hero *hero)
 {
 	char	tile;
 	int		wish_y;
@@ -41,7 +41,7 @@ static void	ft_start_hero_move(t_gamestate *game, t_hero *hero)
 	}
 }
 
-void	ft_update_hero(t_gamestate *game)
+void	ft_update_hero(t_gs *game)
 {
 	t_hero	*hero;
 

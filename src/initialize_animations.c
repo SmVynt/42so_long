@@ -6,14 +6,14 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 23:28:26 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	ft_init_animation(char *path,
-	t_texture *texture, t_animation *anim, t_gamestate *game)
+	t_texture *texture, t_animation *anim, t_gs *game)
 {
 	int	i;
 	int	fc;
@@ -37,7 +37,7 @@ void	ft_init_animation(char *path,
 	anim->next = NULL;
 }
 
-static void	ft_init_enemies_animations(t_gamestate *game)
+static void	ft_init_enemies_animations(t_gs *game)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ static void	ft_init_enemies_animations(t_gamestate *game)
 	}
 }
 
-static void	ft_init_collectibles_animations(t_gamestate *game)
+static void	ft_init_collectibles_animations(t_gs *game)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ static void	ft_init_collectibles_animations(t_gamestate *game)
 	}
 }
 
-void	ft_init_animations(t_gamestate *game)
+void	ft_init_animations(t_gs *game)
 {
 	ft_init_animation(PATH_HERO_IDLE, game->textures.hero_idle,
 		&game->hero.anim.idle, game);

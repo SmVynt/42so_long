@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:44:39 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_check_bounds(t_gamestate *game)
+static void	ft_check_bounds(t_gs *game)
 {
 	int	x;
 	int	y;
@@ -35,7 +35,7 @@ static void	ft_check_bounds(t_gamestate *game)
 	}
 }
 
-static void	ft_check_characters(t_gamestate *game)
+static void	ft_check_characters(t_gs *game)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,7 @@ static void	ft_check_characters(t_gamestate *game)
 	}
 }
 
-static void	ft_check_count(t_gamestate *game)
+static void	ft_check_count(t_gs *game)
 {
 	if (game->c.collectibles < 1)
 		ft_exit("No collectibles in map\n", game);
@@ -74,7 +74,7 @@ static void	ft_check_count(t_gamestate *game)
 		ft_exit("There must be exactly one start position\n", game);
 }
 
-static void	ft_check_reach(t_gamestate *game)
+static void	ft_check_reach(t_gs *game)
 {
 	t_map	*map_reach;
 	int		i;
@@ -97,7 +97,7 @@ static void	ft_check_reach(t_gamestate *game)
 	ft_free_map(map_reach);
 }
 
-void	ft_check_map(t_gamestate *game)
+void	ft_check_map(t_gs *game)
 {
 	ft_printf(COLOR_Y "Checking map.\n" COLOR_X);
 	ft_printf(COLOR_W "Checking bounds. " COLOR_X);

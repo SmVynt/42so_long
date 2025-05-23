@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 00:44:31 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_update_objs(t_gamestate *game)
+void	ft_update_objs(t_gs *game)
 {
 	int			i;
 	t_collect	*col;
@@ -41,7 +41,7 @@ void	ft_update_objs(t_gamestate *game)
 		mk_vec(game->exit.x, game->exit.y), 0);
 }
 
-void	ft_update_exit(t_gamestate *game)
+void	ft_update_exit(t_gs *game)
 {
 	t_exit	*exit;
 
@@ -56,7 +56,7 @@ void	ft_update_exit(t_gamestate *game)
 		mk_vec(game->exit.x, game->exit.y), 0);
 }
 
-void	ft_update_end(t_gamestate *game)
+void	ft_update_end(t_gs *game)
 {
 	int		x;
 	int		y;

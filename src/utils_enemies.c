@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:10:24 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/20 20:13:08 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy)
+void	ft_find_next_spot(t_gs *game, t_enemy *enemy)
 {
 	int	i;
 

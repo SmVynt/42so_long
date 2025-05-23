@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 22:16:51 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 01:06:41 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	ft_key_press_hook(int keycode, t_gamestate *game)
+static int	ft_key_press_hook(int keycode, t_gs *game)
 {
 	if (keycode == 53)
 		ft_exit_game(game);
@@ -37,7 +37,7 @@ static int	ft_key_press_hook(int keycode, t_gamestate *game)
 	return (game->steps);
 }
 
-static int	ft_key_release_hook(int keycode, t_gamestate *game)
+static int	ft_key_release_hook(int keycode, t_gs *game)
 {
 	if (keycode == 0 || keycode == 123)
 	{
@@ -62,7 +62,7 @@ static int	ft_key_release_hook(int keycode, t_gamestate *game)
 	return (game->steps);
 }
 
-void	ft_createhooks(t_gamestate *game)
+void	ft_createhooks(t_gs *game)
 {
 	mlx_hook(game->window, 2, 1L << 0, ft_key_press_hook, game);
 	mlx_hook(game->window, 3, 1L << 1, ft_key_release_hook, game);

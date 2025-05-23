@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:55:26 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_checkinput(int argc, char **argv, t_gamestate *game)
+void	ft_checkinput(int argc, char **argv, t_gs *game)
 {
 	if (argc != 2 || ft_strlen(argv[1]) < 5
 		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
@@ -22,7 +22,7 @@ void	ft_checkinput(int argc, char **argv, t_gamestate *game)
 	}
 }
 
-static void	ft_calculate_map_size(t_gamestate *game, char *src)
+static void	ft_calculate_map_size(t_gs *game, char *src)
 {
 	int		fd;
 	char	*line;
@@ -48,7 +48,7 @@ static void	ft_calculate_map_size(t_gamestate *game, char *src)
 		ft_exit("Map is too small\n", game);
 }
 
-static void	ft_fill_map(t_gamestate *game, char *src)
+static void	ft_fill_map(t_gs *game, char *src)
 {
 	int		fd;
 	int		i;
@@ -73,7 +73,7 @@ static void	ft_fill_map(t_gamestate *game, char *src)
 	game->alloc.map = 1;
 }
 
-void	ft_restart(t_gamestate *game)
+void	ft_restart(t_gs *game)
 {
 	int	i;
 
@@ -100,7 +100,7 @@ void	ft_restart(t_gamestate *game)
 	game->exit.active = 0;
 }
 
-void	ft_initialize(t_gamestate *game, char **argv)
+void	ft_initialize(t_gs *game, char **argv)
 {
 	game->alloc.map = 0;
 	game->alloc.enemies = 0;

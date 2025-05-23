@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:43:34 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_init_image(char *path, t_texture *texture, t_gamestate *game)
+void	ft_init_image(char *path, t_texture *texture, t_gs *game)
 {
 	int	w;
 	int	h;
@@ -26,7 +26,7 @@ void	ft_init_image(char *path, t_texture *texture, t_gamestate *game)
 	ft_printf(COLOR_G "Loaded\n" COLOR_X);
 }
 
-void	ft_init_texture(t_texture *texture, t_gamestate *game,
+void	ft_init_texture(t_texture *texture, t_gs *game,
 		int w, int h)
 {
 	texture->w = w;
@@ -36,7 +36,7 @@ void	ft_init_texture(t_texture *texture, t_gamestate *game,
 		ft_exit_error("Error\nCould not create new texture\n", game);
 }
 
-void	ft_init_images(t_gamestate *game)
+void	ft_init_images(t_gs *game)
 {
 	t_vec	s;
 

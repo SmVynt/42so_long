@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:05 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 01:45:48 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:36 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ typedef struct s_render
 	t_texture	render;
 }	t_render;
 
-typedef struct s_gamestate
+typedef struct s_gs
 {
 	void		*mlx;
 	void		*window;
@@ -241,40 +241,40 @@ typedef struct s_gamestate
 	t_count		c;
 	t_alloc		alloc;
 	t_textures	textures;
-}	t_gamestate;
+}	t_gs;
 
-void	ft_exit_error(char *str, t_gamestate *game);
-void	ft_exit(char *str, t_gamestate *game);
-int		ft_exit_game(t_gamestate *game);
-void	ft_createhooks(t_gamestate *game);
-void	ft_checkinput(int argc, char **argv, t_gamestate *game);
+void	ft_exit_error(char *str, t_gs *game);
+void	ft_exit(char *str, t_gs *game);
+int		ft_exit_game(t_gs *game);
+void	ft_createhooks(t_gs *game);
+void	ft_checkinput(int argc, char **argv, t_gs *game);
 
-void	ft_init_image(char *path, t_texture *texture, t_gamestate *game);
-void	ft_init_images(t_gamestate *game);
-void	ft_init_animations(t_gamestate *game);
+void	ft_init_image(char *path, t_texture *texture, t_gs *game);
+void	ft_init_images(t_gs *game);
+void	ft_init_animations(t_gs *game);
 void	ft_init_animation(char *path,
-			t_texture *texture, t_animation *anim, t_gamestate *game);
-void	ft_init_tileset(t_gamestate *game);
-void	ft_init_texture(t_texture *texture, t_gamestate *game, int w, int h);
-void	ft_init_set(char *path, t_texture *texture, t_gamestate *game);
-void	ft_init_hero(t_gamestate *game);
-void	ft_init_enemies(t_gamestate *game);
-void	ft_init_objs(t_gamestate *game);
-void	ft_restart(t_gamestate *game);
-void	ft_initialize(t_gamestate *game, char **argv);
+			t_texture *texture, t_animation *anim, t_gs *game);
+void	ft_init_tileset(t_gs *game);
+void	ft_init_texture(t_texture *texture, t_gs *game, int w, int h);
+void	ft_init_set(char *path, t_texture *texture, t_gs *game);
+void	ft_init_hero(t_gs *game);
+void	ft_init_enemies(t_gs *game);
+void	ft_init_objs(t_gs *game);
+void	ft_restart(t_gs *game);
+void	ft_initialize(t_gs *game, char **argv);
 
-void	ft_check_map(t_gamestate *game);
+void	ft_check_map(t_gs *game);
 void	ft_flood_fill(t_map *map, char start);
-void	ft_fill_tilemap(t_gamestate *game);
+void	ft_fill_tilemap(t_gs *game);
 
-int		ft_update(t_gamestate *game);
-void	ft_update_enemies(t_gamestate *game);
-void	ft_update_hero(t_gamestate *game);
-void	ft_update_objs(t_gamestate *game);
-void	ft_update_exit(t_gamestate *game);
-void	ft_update_count(t_gamestate *game);
+int		ft_update(t_gs *game);
+void	ft_update_enemies(t_gs *game);
+void	ft_update_hero(t_gs *game);
+void	ft_update_objs(t_gs *game);
+void	ft_update_exit(t_gs *game);
+void	ft_update_count(t_gs *game);
 
-void	ft_find_next_spot(t_gamestate *game, t_enemy *enemy);
+void	ft_find_next_spot(t_gs *game, t_enemy *enemy);
 
 void	ft_next_frame_to_img(t_texture *target,
 			t_anim_list *anim_list, t_vec v, int f);
@@ -310,8 +310,8 @@ int		ft_dir(int a, int b);
 char	*ft_strip_from_n(char *str);
 t_map	*ft_copy_map(t_map *src);
 void	ft_free_map(t_map *map);
-void	ft_allocate_map(t_map *map, t_gamestate *game);
+void	ft_allocate_map(t_map *map, t_gs *game);
 
-void	ft_update_end(t_gamestate *game);
+void	ft_update_end(t_gs *game);
 
 #endif

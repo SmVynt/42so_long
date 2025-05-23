@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:13:01 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_map	*ft_copy_map(t_map *src)
 	return (dst);
 }
 
-void	ft_allocate_map(t_map *map, t_gamestate *game)
+void	ft_allocate_map(t_map *map, t_gs *game)
 {
 	int	i;
 

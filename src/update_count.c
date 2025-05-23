@@ -6,13 +6,13 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:45:54 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/21 00:34:42 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_update_count(t_gamestate *game)
+void	ft_update_count(t_gs *game)
 {
 	t_vec		v;
 	int			steps;
