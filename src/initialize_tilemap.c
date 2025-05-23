@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 03:18:20 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_fill_tilemap(t_gs *game)
 	int	y;
 	int	fill;
 
+	ft_printf(COLOR_Y "Genarating map.\n" COLOR_X);
 	y = 0;
 	while (y < game->map.h - 1)
 	{
@@ -113,4 +114,6 @@ void	ft_fill_tilemap(t_gs *game)
 		y++;
 	}
 	ft_add_decor(game);
+	ft_printf(COLOR_G "Map generated\n" COLOR_X);
+	ft_printf(COLOR_Y "Starting.\n" COLOR_X);
 }

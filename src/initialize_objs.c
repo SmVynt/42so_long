@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 04:01:12 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_init_exit(t_gs *game, int x, int y)
 	game->exit.y = y * TS;
 	game->exit.state = STATE_IDLE;
 	game->exit.active = 0;
-	game->map.tile[x][y] = C_E;
+	game->map.tile[x][y] = C_EX;
 }
 
 void	ft_init_enemies(t_gs *game)

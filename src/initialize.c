@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 03:45:26 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_calculate_map_size(t_gs *game, char *src)
 
 	fd = open (src, O_RDONLY);
 	if (fd < 0)
-		ft_exit_error("Error\nCould not open the map file\n", game);
+		ft_exit_error("Could not open the map file\n", game);
 	line = ft_strip_from_n(get_next_line(fd));
 	if (!line)
 		ft_exit("Map is empty\n", game);
@@ -58,7 +58,7 @@ static void	ft_fill_map(t_gs *game, char *src)
 	ft_allocate_map(&game->map, game);
 	fd = open (src, O_RDONLY);
 	if (fd < 0)
-		ft_exit_error("Error\nCould not open the map file\n", game);
+		ft_exit_error("Could not open the map file\n", game);
 	line = ft_strip_from_n(get_next_line(fd));
 	i = 0;
 	while (line)
@@ -77,10 +77,11 @@ void	ft_restart(t_gs *game)
 {
 	int	i;
 
+	ft_printf(COLOR_Y "Restarting game.\n" COLOR_X);
 	ft_init_hero(game);
 	ft_init_enemies(game);
 	ft_init_objs(game);
-	game->state = STATE_IDLE;
+	game->state = STATE_CALC;
 	game->turn = 0.0f;
 	game->steps = 0;
 	game->collected = 0;
@@ -98,6 +99,7 @@ void	ft_restart(t_gs *game)
 		game->enemies[i].anim.current = &game->enemies[i].anim.idle;
 	game->exit.anim.current = &game->exit.anim.idle;
 	game->exit.active = 0;
+	ft_printf(COLOR_G "Game restarted\n" COLOR_X);
 }
 
 void	ft_initialize(t_gs *game, char **argv)

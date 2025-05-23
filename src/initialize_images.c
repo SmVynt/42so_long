@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 03:16:37 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_init_image(char *path, t_texture *texture, t_gs *game)
 {
-	int	w;
-	int	h;
+	int		w;
+	int		h;
 
-	ft_printf("Loading %s ", path);
+	ft_printf(COLOR_W "Loading %s " COLOR_X, path);
 	texture->src = mlx_xpm_file_to_image(game->mlx, path, &w, &h);
 	if (!texture->src)
 		ft_exit_error("Could not load that image\n", game);
@@ -33,7 +33,7 @@ void	ft_init_texture(t_texture *texture, t_gs *game,
 	texture->h = h;
 	texture->src = mlx_new_image(game->mlx, w, h);
 	if (!texture->src)
-		ft_exit_error("Error\nCould not create new texture\n", game);
+		ft_exit_error("Could not create new texture\n", game);
 }
 
 void	ft_init_images(t_gs *game)
@@ -42,6 +42,7 @@ void	ft_init_images(t_gs *game)
 
 	s.x = game->map.w * TS;
 	s.y = game->map.h * TS;
+	ft_printf(COLOR_Y "Loading images.\n" COLOR_X);
 	ft_init_texture(&game->img.render, game, s.x * SCALE, s.y * SCALE);
 	ft_init_texture(&game->img.bg, game, s.x, s.y);
 	ft_init_texture(&game->img.decor, game, s.x, s.y);

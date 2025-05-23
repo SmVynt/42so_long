@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:30:07 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/23 03:14:59 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_init_animation(char *path,
 			mk_vec(0, -(i * game->textures.temp.w)), 0);
 		i++;
 	}
+	ft_printf(COLOR_G "Animation generated\n" COLOR_X);
 	anim->frame = 0;
 	anim->frame_count = fc;
 	anim->frame_time = FRAME_TIME;
@@ -41,6 +42,8 @@ static void	ft_init_enemies_animations(t_gs *game)
 {
 	int	i;
 
+	if (game->c.enemies <= 0)
+		return ;
 	ft_init_animation(PATH_ENEMY_IDLE, game->textures.enemy_idle,
 		&game->enemies[0].anim.idle, game);
 	ft_init_animation(PATH_ENEMY_MOVE, game->textures.enemy_move,
