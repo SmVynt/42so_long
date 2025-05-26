@@ -6,7 +6,7 @@
 #    By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 16:14:14 by psmolin           #+#    #+#              #
-#    Updated: 2025/05/23 00:43:15 by psmolin          ###   ########.fr        #
+#    Updated: 2025/05/26 18:27:29 by psmolin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 HEADERS = so_long.h
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -I.
+CFLAGS = -Wall -Wextra -Werror -I.
 MK = make -C
 SRC = src/
 #

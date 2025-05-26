@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 23:19:27 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:05:45 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static void	ft_clean(t_gs *game)
 	if (game->collects)
 		free(game->collects);
 	ft_free_map(&game->map);
+	ft_printf(COLOR_B "Exiting\n" COLOR_X);
+	system("leaks -list so_long");
+	ft_printf("\n");
 }
 
 void	ft_exit_error(char *str, t_gs *game)

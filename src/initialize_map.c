@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:04:28 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/26 23:09:23 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static void	ft_check_reach(t_gs *game)
 		}
 	}
 	ft_free_map(map_reach);
+	free(map_reach);
+
 }
 
 void	ft_check_map(t_gs *game)

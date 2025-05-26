@@ -6,7 +6,7 @@
 /*   By: psmolin <psmolin@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:05:12 by psmolin           #+#    #+#             */
-/*   Updated: 2025/05/23 02:27:09 by psmolin          ###   ########.fr       */
+/*   Updated: 2025/05/26 22:55:53 by psmolin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@ int	main(int argc, char **argv)
 {
 	t_gs	game;
 
+	// ft_printf(COLOR_B "Start...\n" COLOR_X);
+	// system("leaks -list so_long");
 	ft_checkinput (argc, argv, &game);
+	// ft_printf(COLOR_B "Checking\n" COLOR_X);
+	// system("leaks -list so_long");
 	ft_initialize (&game, argv);
+	// ft_printf(COLOR_B "Initialization\n" COLOR_X);
+	// system("leaks -list so_long");
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		ft_exit_error("Could not initialize MiniLibX\n", &game);
