@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <string.h>
 
 static void	ft_update_state(t_gs *game)
 {
@@ -34,10 +35,14 @@ static void	ft_update_state(t_gs *game)
 		game->state = STATE_IDLE;
 }
 
-int	ft_update(t_gs *game)
+void	ft_update(void *param)
 {
+	t_gs	*game;
+	size_t	n;
+
+	game = (t_gs *)param;
 	if (game->state == STATE_FINAL)
-		return (0);
+		return ;
 	ft_update_state(game);
 	ft_update_objs(game);
 	ft_update_exit(game);
@@ -49,7 +54,6 @@ int	ft_update(t_gs *game)
 	ft_cover_images(&game->img.render_sm, &game->img.en, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.fg, mk_vec(0, 0), 0);
 	ft_scale_image_ca(&game->img.render_sm, &game->img.render);
-	mlx_put_image_to_window(game->mlx, game->window,
-		game->img.render.src, 0, 0);
-	return (0);
+	n = (size_t)game->img.render.w * (size_t)game->img.render.h * 4;
+	memcpy(game->screen->pixels, game->img.render.src->pixels, n);
 }

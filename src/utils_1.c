@@ -16,8 +16,11 @@ static void	ft_clean(t_gs *game)
 {
 	if (game->mlx)
 	{
-		mlx_destroy_window(game->mlx, game->window);
-		free(game->mlx);
+		if (game->screen)
+			mlx_delete_image(game->mlx, game->screen);
+		game->screen = NULL;
+		mlx_terminate(game->mlx);
+		game->mlx = NULL;
 	}
 	if (game->enemies)
 		free(game->enemies);
@@ -25,7 +28,6 @@ static void	ft_clean(t_gs *game)
 		free(game->collects);
 	ft_free_map(&game->map);
 	ft_printf(COLOR_B "Exiting\n" COLOR_X);
-	system("leaks -list so_long");
 	ft_printf("\n");
 }
 
@@ -46,11 +48,10 @@ void	ft_exit(char *str, t_gs *game)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_exit_game(t_gs *game)
+void	ft_exit_game(t_gs *game)
 {
 	ft_clean(game);
 	exit(0);
-	return (game->steps);
 }
 
 char	*ft_strip_from_n(char *str)

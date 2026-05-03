@@ -62,8 +62,8 @@ void	ft_scale_image(t_texture *src, t_texture *dst)
 	char	*src_ptr;
 	char	*dst_ptr;
 
-	src_ptr = get_img_data(src->src).data;
-	dst_ptr = get_img_data(dst->src).data;
+	src_ptr = (char *)src->src->pixels;
+	dst_ptr = (char *)dst->src->pixels;
 	x = 0;
 	while (x < dst->w)
 	{
@@ -88,8 +88,8 @@ void	ft_scale_image_ca(t_texture *src, t_texture *dst)
 	char	*src_ptr;
 	char	*dst_ptr;
 
-	src_ptr = get_img_data(src->src).data;
-	dst_ptr = get_img_data(dst->src).data;
+	src_ptr = (char *)src->src->pixels;
+	dst_ptr = (char *)dst->src->pixels;
 	x = 0;
 	while (x < dst->w)
 	{

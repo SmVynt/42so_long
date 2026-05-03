@@ -48,22 +48,22 @@
 # define STATE_CALC 8
 # define STATE_CALC2 9
 
-# define PATH_TILES "./textures/bg_tileset_02.xpm"
-# define PATH_HERO_IDLE "./textures/hero_idle.xpm"
-# define PATH_HERO_MOVE "./textures/hero_run.xpm"
-# define PATH_ENEMY_IDLE "./textures/enemy_idle.xpm"
-# define PATH_ENEMY_MOVE "./textures/enemy_move.xpm"
-# define PATH_ERASOR "./textures/erasor.xpm"
-# define PATH_DECOR_8 "./textures/decor_8.xpm"
-# define PATH_DECOR_16 "./textures/decor_16.xpm"
-# define PATH_EXIT_O "./textures/exit_opened.xpm"
-# define PATH_EXIT_C "./textures/exit_closed.xpm"
-# define PATH_EXIT_OP "./textures/exit_open.xpm"
-# define PATH_CRYSTAL "./textures/crystal.xpm"
-# define PATH_CRYSTAL_TAKE "./textures/crystal_take.xpm"
-# define PATH_DIGITS "./textures/t_digits_x2.xpm"
-# define PATH_SCREEN_WON "./textures/screen_won.xpm"
-# define PATH_SCREEN_LOST "./textures/screen_lost.xpm"
+# define PATH_TILES "./textures/bg_tileset_02.png"
+# define PATH_HERO_IDLE "./textures/hero_idle.png"
+# define PATH_HERO_MOVE "./textures/hero_run.png"
+# define PATH_ENEMY_IDLE "./textures/enemy_idle.png"
+# define PATH_ENEMY_MOVE "./textures/enemy_move.png"
+# define PATH_ERASOR "./textures/erasor.png"
+# define PATH_DECOR_8 "./textures/decor_8.png"
+# define PATH_DECOR_16 "./textures/decor_16.png"
+# define PATH_EXIT_O "./textures/exit_opened.png"
+# define PATH_EXIT_C "./textures/exit_closed.png"
+# define PATH_EXIT_OP "./textures/exit_open.png"
+# define PATH_CRYSTAL "./textures/crystal.png"
+# define PATH_CRYSTAL_TAKE "./textures/crystal_take.png"
+# define PATH_DIGITS "./textures/t_digits_x2.png"
+# define PATH_SCREEN_WON "./textures/screen_won.png"
+# define PATH_SCREEN_LOST "./textures/screen_lost.png"
 
 # define C_W '1'
 # define C_E '0'
@@ -88,9 +88,9 @@ typedef struct s_map
 
 typedef struct s_texture
 {
-	void	*src;
-	int		w;
-	int		h;
+	mlx_texture_t	*src;
+	int				w;
+	int				h;
 }	t_texture;
 
 typedef struct s_animation	t_animation;
@@ -206,14 +206,6 @@ typedef struct s_alloc
 	int		collects;
 }	t_alloc;
 
-typedef struct s_imgdt
-{
-	int		bpp;
-	int		size_line;
-	int		endian;
-	char	*data;
-}	t_imgdt;
-
 typedef struct s_render
 {
 	t_texture	bg;
@@ -226,8 +218,8 @@ typedef struct s_render
 
 typedef struct s_gs
 {
-	void		*mlx;
-	void		*window;
+	mlx_t			*mlx;
+	mlx_image_t		*screen;
 	t_render	img;
 	t_map		map;
 	float		turn;
@@ -245,7 +237,7 @@ typedef struct s_gs
 
 void	ft_exit_error(char *str, t_gs *game);
 void	ft_exit(char *str, t_gs *game);
-int		ft_exit_game(t_gs *game);
+void	ft_exit_game(t_gs *game);
 void	ft_createhooks(t_gs *game);
 void	ft_checkinput(int argc, char **argv, t_gs *game);
 
@@ -267,7 +259,7 @@ void	ft_check_map(t_gs *game);
 void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gs *game);
 
-int		ft_update(t_gs *game);
+void	ft_update(void *param);
 void	ft_update_enemies(t_gs *game);
 void	ft_update_hero(t_gs *game);
 void	ft_update_objs(t_gs *game);
@@ -294,8 +286,6 @@ int		get_r(int rgba);
 int		get_g(int rgba);
 int		get_b(int rgba);
 int		get_a(int rgba);
-
-t_imgdt	get_img_data(void *img);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);

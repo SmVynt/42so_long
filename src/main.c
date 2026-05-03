@@ -11,29 +11,24 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <string.h>
 
 int	main(int argc, char **argv)
 {
 	t_gs	game;
 
-	// ft_printf(COLOR_B "Start...\n" COLOR_X);
-	// system("leaks -list so_long");
-	ft_checkinput (argc, argv, &game);
-	// ft_printf(COLOR_B "Checking\n" COLOR_X);
-	// system("leaks -list so_long");
-	ft_initialize (&game, argv);
-	// ft_printf(COLOR_B "Initialization\n" COLOR_X);
-	// system("leaks -list so_long");
-	game.mlx = mlx_init();
+	memset(&game, 0, sizeof(game));
+	ft_checkinput(argc, argv, &game);
+	ft_initialize(&game, argv);
+	game.mlx = mlx_init(game.map.w * SCALE * TS, game.map.h * SCALE * TS,
+			"So Long...", false);
 	if (!game.mlx)
-		ft_exit_error("Could not initialize MiniLibX\n", &game);
-	game.window = mlx_new_window(game.mlx, game.map.w * SCALE * TS,
-			game.map.h * SCALE * TS, "So Long...");
+		ft_exit_error("Could not initialize MLX42\n", &game);
 	ft_createhooks(&game);
 	ft_init_images(&game);
 	ft_fill_tilemap(&game);
 	ft_update_count(&game);
 	mlx_loop(game.mlx);
-	ft_exit_error("MiniLibX looping error.\n", &game);
+	ft_exit_error("MLX42 loop error.\n", &game);
 	return (0);
 }

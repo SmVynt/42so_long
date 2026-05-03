@@ -12,13 +12,9 @@
 
 #include "so_long.h"
 
-t_imgdt	get_img_data(void *img)
+static char	*ft_tex_pixels(mlx_texture_t *tex)
 {
-	t_imgdt	img_data;
-
-	img_data.data = mlx_get_data_addr(img, &img_data.bpp,
-			&img_data.size_line, &img_data.endian);
-	return (img_data);
+	return ((char *)tex->pixels);
 }
 
 void	ft_clean_texture(t_texture *dst)
@@ -27,7 +23,7 @@ void	ft_clean_texture(t_texture *dst)
 	int		j;
 	char	*dst_ptr;
 
-	dst_ptr = get_img_data(dst->src).data;
+	dst_ptr = ft_tex_pixels(dst->src);
 	i = 0;
 	while (i < dst->h)
 	{
@@ -52,8 +48,8 @@ void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
 	char	*src_ptr;
 	char	*dst_ptr;
 
-	src_ptr = get_img_data(src->src).data;
-	dst_ptr = get_img_data(dst->src).data;
+	src_ptr = ft_tex_pixels(src->src);
+	dst_ptr = ft_tex_pixels(dst->src);
 	i = 0;
 	while (i < src->h)
 	{
@@ -92,8 +88,8 @@ void	ft_cover_images(t_texture *dst, t_texture *src, t_vec v, int f)
 	char	*src_ptr;
 	char	*dst_ptr;
 
-	src_ptr = get_img_data(src->src).data;
-	dst_ptr = get_img_data(dst->src).data;
+	src_ptr = ft_tex_pixels(src->src);
+	dst_ptr = ft_tex_pixels(dst->src);
 	i = 0;
 	while (i < src->h)
 	{
