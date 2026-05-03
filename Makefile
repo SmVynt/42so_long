@@ -11,12 +11,28 @@
 # **************************************************************************** #
 
 NAME = so_long
-HEADERS = so_long.h
+HEADERS = $(SRC)so_long.h
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g -I.
 MK = make -C
 SRC = src/
+
+MLX42_DIR := MLX42
+MLX42_LIB := $(MLX42_DIR)/libmlx42.a
+MLX42_REPO := https://github.com/codam-coding-college/MLX42.git
+
+CFLAGS = -Wall -Wextra -Werror -g -I. -I$(MLX42_DIR)/include -I/opt/homebrew/include
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	MLXFLAGS := -L$(MLX42_DIR) -lmlx42 -lglfw -ldl -lGL -lm -pthread
+endif
+ifeq ($(UNAME_S),Darwin)
+	MLXFLAGS := -L$(MLX42_DIR) -lmlx42 -L/opt/homebrew/lib -lglfw -framework OpenGL -framework AppKit \
+		-framework AudioToolbox -framework CoreAudio -framework CoreFoundation
+endif
+
 #
 SRCS = \
 		$(SRC)initialize.c \
@@ -44,10 +60,6 @@ SRCS = \
 		$(SRC)main.c
 OBJS = $(SRCS:.c=.o)
 #
-MLX_FOLDER = mlx/
-MLX_LIB = $(MLX_FOLDER)libmlx.a
-MLX_FLAGS = -Lmlx -lmlx -framework openGL -framework AppKit
-#
 GNL_FOLDER = lbs/gnl/
 GNL_LIB = $(GNL_FOLDER)libgnl.a
 GNL_FLAGS = -L$(GNL_FOLDER) -lgnl
@@ -55,28 +67,41 @@ PRT_FOLDER = lbs/printf/
 PRT_LIB = $(PRT_FOLDER)libftprintf.a
 PRT_FLAGS = -L$(PRT_FOLDER) -lftprintf
 #
-%.o: %.c $(HEADERS)
+%.o: %.c $(HEADERS) $(MLX42_LIB)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: makeadd $(NAME)
+all: $(NAME)
 
 makeadd:
-	$(MK) $(MLX_FOLDER) all
 	$(MK) $(GNL_FOLDER) all
 	$(MK) $(PRT_FOLDER) all
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(GNL_FLAGS) $(PRT_FLAGS) \
-	$(OBJS) $(MLX_LIB) $(GNL_LIB) $(PRT_LIB) -o $(NAME)
+$(NAME): $(OBJS) $(MLX42_LIB) makeadd
+	$(CC) $(CFLAGS) $(OBJS) $(GNL_FLAGS) $(PRT_FLAGS) $(MLXFLAGS) -o $(NAME)
+
+$(MLX42_LIB):
+	@echo "Checking for MLX42..."
+	@if [ ! -d "$(MLX42_DIR)" ]; then \
+		echo "Cloning MLX42 into $(MLX42_DIR)..."; \
+		git clone $(MLX42_REPO) $(MLX42_DIR); \
+	else \
+		echo "MLX42 already exists in $(MLX42_DIR). Skipping clone."; \
+	fi
+	@if [ ! -f "$(MLX42_LIB)" ]; then \
+		echo "Building MLX42 library..."; \
+		cmake -S $(MLX42_DIR) -B $(MLX42_DIR)/build; \
+		cmake --build $(MLX42_DIR)/build; \
+		cp $(MLX42_DIR)/build/libmlx42.a $(MLX42_DIR)/; \
+	else \
+		echo "MLX42 library already built."; \
+	fi
 
 clean:
-	$(MK) $(MLX_FOLDER) clean
 	$(MK) $(GNL_FOLDER) clean
 	$(MK) $(PRT_FOLDER) clean
 	$(RM) $(OBJS)
 
 fclean:
-	$(MK) $(MLX_FOLDER) fclean
 	$(MK) $(GNL_FOLDER) fclean
 	$(MK) $(PRT_FOLDER) fclean
 	$(RM) $(OBJS)
