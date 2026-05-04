@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
 int	main(int argc, char **argv)
 {
 	t_gs	game;
 
-	memset(&game, 0, sizeof(game));
+	ft_memset(&game, 0, sizeof(game));
 	ft_checkinput(argc, argv, &game);
 	ft_initialize(&game, argv);
 	game.mlx = mlx_init(game.map.w * SCALE * TS, game.map.h * SCALE * TS,

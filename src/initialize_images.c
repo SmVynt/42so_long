@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <string.h>
 
 void	ft_init_image(char *path, t_texture *texture, t_gs *game)
 {
@@ -44,7 +43,7 @@ void	ft_init_texture(t_texture *texture, t_gs *game, int w, int h,
 		ft_exit_error("Could not create new texture\n", game);
 	}
 	total = (size_t)w * (size_t)h * 4;
-	memset(texture->src->pixels, 0, total);
+	ft_memset(texture->src->pixels, 0, total);
 	i = 0;
 	while (i < total)
 	{
@@ -85,7 +84,7 @@ void	ft_init_images(t_gs *game)
 	if (mlx_image_to_window(game->mlx, game->screen, 0, 0) < 0)
 		ft_exit_error("Could not attach image to window\n", game);
 	total = (size_t)game->img.render.w * (size_t)game->img.render.h * 4;
-	memset(game->screen->pixels, 0, total);
+	ft_memset(game->screen->pixels, 0, total);
 	i = 0;
 	while (i < total)
 	{

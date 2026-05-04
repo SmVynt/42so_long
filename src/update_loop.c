@@ -12,7 +12,6 @@
 
 #include "so_long.h"
 #include <math.h>
-#include <string.h>
 
 static double	ft_clamp_dt(t_gs *game)
 {
@@ -71,5 +70,5 @@ void	ft_update(void *param)
 	ft_cover_images(&game->img.render_sm, &game->img.fg, mk_vec(0, 0), 0);
 	ft_scale_image_ca(&game->img.render_sm, &game->img.render);
 	n = (size_t)game->img.render.w * (size_t)game->img.render.h * 4;
-	memcpy(game->screen->pixels, game->img.render.src->pixels, n);
+	ft_memcpy(game->screen->pixels, game->img.render.src->pixels, n);
 }
