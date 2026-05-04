@@ -34,6 +34,7 @@
 # define TS 32
 # define SCALE 3
 # define FRAME_TIME 4
+# define ANIM_REF_FPS 60.0
 # define MOVE_SPEED 0.2f
 # define GAME_LERP 0.45f
 
@@ -100,8 +101,8 @@ typedef struct s_animation
 	t_texture	*src;
 	int			frame;
 	int			frame_count;
-	int			frame_time;
-	int			delta;
+	double		acc;
+	double		secs;
 	t_animation	*next;
 }	t_animation;
 
@@ -243,12 +244,14 @@ void	ft_checkinput(int argc, char **argv, t_gs *game);
 
 void	ft_init_image(char *path, t_texture *texture, t_gs *game);
 void	ft_init_images(t_gs *game);
+void	ft_destroy_game_textures(t_gs *game);
 void	ft_init_animations(t_gs *game);
 void	ft_init_animation(char *path,
-			t_texture *texture, t_animation *anim, t_gs *game);
+			t_texture *texture, t_animation *anim, t_gs *game, int max_fc);
 void	ft_init_tileset(t_gs *game);
-void	ft_init_texture(t_texture *texture, t_gs *game, int w, int h);
-void	ft_init_set(char *path, t_texture *texture, t_gs *game);
+void	ft_init_texture(t_texture *texture, t_gs *game, int w, int h,
+			uint8_t clear_a);
+void	ft_init_set(char *path, t_texture *texture, t_gs *game, int max_count);
 void	ft_init_hero(t_gs *game);
 void	ft_init_enemies(t_gs *game);
 void	ft_init_objs(t_gs *game);
@@ -260,18 +263,18 @@ void	ft_flood_fill(t_map *map, char start);
 void	ft_fill_tilemap(t_gs *game);
 
 void	ft_update(void *param);
-void	ft_update_enemies(t_gs *game);
-void	ft_update_hero(t_gs *game);
-void	ft_update_objs(t_gs *game);
-void	ft_update_exit(t_gs *game);
+void	ft_update_enemies(t_gs *game, double dt);
+void	ft_update_hero(t_gs *game, double dt);
+void	ft_update_objs(t_gs *game, double dt);
+void	ft_update_exit(t_gs *game, double dt);
 void	ft_update_count(t_gs *game);
 
 void	ft_find_next_spot(t_gs *game, t_enemy *enemy);
 
 void	ft_next_frame_to_img(t_texture *target,
-			t_anim_list *anim_list, t_vec v, int f);
+			t_anim_list *anim_list, t_vec v, int f, double dt);
 void	ft_next_frame_to_img_cover(t_texture *target,
-			t_anim_list *anim_list, t_vec v, int f);
+			t_anim_list *anim_list, t_vec v, int f, double dt);
 
 void	ft_scale_image(t_texture *src, t_texture *dst);
 void	ft_scale_image_ca(t_texture *src, t_texture *dst);

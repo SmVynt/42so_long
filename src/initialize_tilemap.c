@@ -22,14 +22,16 @@ void	ft_init_tileset(t_gs *game)
 	w = game->textures.tileset.w;
 	while (i < 16)
 	{
-		ft_init_texture(&game->textures.tiles[i], game, w, w);
+		ft_init_texture(&game->textures.tiles[i], game, w, w, 0);
 		ft_override_images(&game->textures.tiles[i],
 			&game->textures.tileset, mk_vec(0, -(i * w)), 0);
 		i++;
 	}
+	mlx_delete_texture(game->textures.tileset.src);
+	game->textures.tileset.src = NULL;
 }
 
-void	ft_init_set(char *path, t_texture *texture, t_gs *game)
+void	ft_init_set(char *path, t_texture *texture, t_gs *game, int max_count)
 {
 	int	i;
 	int	count;
@@ -37,14 +39,18 @@ void	ft_init_set(char *path, t_texture *texture, t_gs *game)
 	i = 0;
 	ft_init_image(path, &game->textures.temp, game);
 	count = game->textures.temp.h / game->textures.temp.w;
+	if (count > max_count)
+		count = max_count;
 	while (i < count)
 	{
 		ft_init_texture(&texture[i], game,
-			game->textures.temp.w, game->textures.temp.w);
+			game->textures.temp.w, game->textures.temp.w, 0);
 		ft_override_images(&texture[i], &game->textures.temp,
 			mk_vec(0, -(i * game->textures.temp.w)), 0);
 		i++;
 	}
+	mlx_delete_texture(game->textures.temp.src);
+	game->textures.temp.src = NULL;
 }
 
 static void	ft_place_decor(t_gs *game, t_texture *tex,

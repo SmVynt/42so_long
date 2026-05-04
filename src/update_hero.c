@@ -41,7 +41,7 @@ static void	ft_start_hero_move(t_gs *game, t_hero *hero)
 	}
 }
 
-void	ft_update_hero(t_gs *game)
+void	ft_update_hero(t_gs *game, double dt)
 {
 	t_hero	*hero;
 
@@ -58,5 +58,5 @@ void	ft_update_hero(t_gs *game)
 	else if (game->state == STATE_HERO)
 		ft_update_hero_move(game, hero);
 	ft_next_frame_to_img(&game->img.fg, &game->hero.anim,
-		mk_vec(game->hero.x, game->hero.y - 12), game->hero.flipped);
+		mk_vec(game->hero.x, game->hero.y - 12), game->hero.flipped, dt);
 }

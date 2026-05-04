@@ -12,16 +12,15 @@
 
 #include "so_long.h"
 
-void	ft_next_frame_to_img(t_texture *target,
-			t_anim_list *anim_list, t_vec v, int f)
+static void	ft_anim_advance(t_anim_list *anim_list, double dt)
 {
 	t_animation	*anim;
 
 	anim = anim_list->current;
-	anim->frame_time--;
-	if (anim->frame_time <= 0)
+	anim->acc += dt;
+	while (anim->secs > 0.0 && anim->acc >= anim->secs)
 	{
-		anim->frame_time = anim->delta;
+		anim->acc -= anim->secs;
 		anim->frame++;
 		if (anim->frame >= anim->frame_count)
 		{
@@ -29,35 +28,31 @@ void	ft_next_frame_to_img(t_texture *target,
 			{
 				anim_list->current = anim->next;
 				anim_list->current->frame = 0;
+				anim_list->current->acc = 0.0;
+				anim = anim_list->current;
 			}
 			else
 				anim->frame = 0;
 		}
 	}
+}
+
+void	ft_next_frame_to_img(t_texture *target,
+			t_anim_list *anim_list, t_vec v, int f, double dt)
+{
+	t_animation	*anim;
+
+	ft_anim_advance(anim_list, dt);
+	anim = anim_list->current;
 	ft_override_images(target, &anim->src[anim->frame], v, f);
 }
 
 void	ft_next_frame_to_img_cover(t_texture *target,
-			t_anim_list *anim_list, t_vec v, int f)
+			t_anim_list *anim_list, t_vec v, int f, double dt)
 {
 	t_animation	*anim;
 
+	ft_anim_advance(anim_list, dt);
 	anim = anim_list->current;
-	anim->frame_time--;
-	if (anim->frame_time <= 0)
-	{
-		anim->frame_time = anim->delta;
-		anim->frame++;
-		if (anim->frame >= anim->frame_count)
-		{
-			if (anim->next)
-			{
-				anim_list->current = anim->next;
-				anim_list->current->frame = 0;
-			}
-			else
-				anim->frame = 0;
-		}
-	}
 	ft_cover_images(target, &anim->src[anim->frame], v, f);
 }

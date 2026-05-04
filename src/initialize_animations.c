@@ -13,7 +13,7 @@
 #include "so_long.h"
 
 void	ft_init_animation(char *path,
-	t_texture *texture, t_animation *anim, t_gs *game)
+	t_texture *texture, t_animation *anim, t_gs *game, int max_fc)
 {
 	int	i;
 	int	fc;
@@ -21,19 +21,23 @@ void	ft_init_animation(char *path,
 	i = 0;
 	ft_init_image(path, &game->textures.temp, game);
 	fc = game->textures.temp.h / game->textures.temp.w;
+	if (fc > max_fc)
+		fc = max_fc;
 	while (i < fc)
 	{
 		ft_init_texture(&texture[i], game,
-			game->textures.temp.w, game->textures.temp.w);
+			game->textures.temp.w, game->textures.temp.w, 0);
 		ft_override_images(&texture[i], &game->textures.temp,
 			mk_vec(0, -(i * game->textures.temp.w)), 0);
 		i++;
 	}
+	mlx_delete_texture(game->textures.temp.src);
+	game->textures.temp.src = NULL;
 	ft_printf(COLOR_G "Animation generated\n" COLOR_X);
 	anim->frame = 0;
 	anim->frame_count = fc;
-	anim->frame_time = FRAME_TIME;
-	anim->delta = FRAME_TIME;
+	anim->acc = 0.0;
+	anim->secs = (double)FRAME_TIME / ANIM_REF_FPS;
 	anim->src = texture;
 	anim->next = NULL;
 }
@@ -45,9 +49,9 @@ static void	ft_init_enemies_animations(t_gs *game)
 	if (game->c.enemies <= 0)
 		return ;
 	ft_init_animation(PATH_ENEMY_IDLE, game->textures.enemy_idle,
-		&game->enemies[0].anim.idle, game);
+		&game->enemies[0].anim.idle, game, 4);
 	ft_init_animation(PATH_ENEMY_MOVE, game->textures.enemy_move,
-		&game->enemies[0].anim.move, game);
+		&game->enemies[0].anim.move, game, 4);
 	i = -1;
 	while (++i < game->c.enemies)
 	{
@@ -62,9 +66,9 @@ static void	ft_init_collectibles_animations(t_gs *game)
 	int	i;
 
 	ft_init_animation(PATH_CRYSTAL, game->textures.coll_idle,
-		&game->collects[0].anim.idle, game);
+		&game->collects[0].anim.idle, game, 4);
 	ft_init_animation(PATH_CRYSTAL_TAKE, game->textures.coll_idle2,
-		&game->collects[0].anim.idle2, game);
+		&game->collects[0].anim.idle2, game, 4);
 	i = -1;
 	while (++i < game->c.collectibles)
 	{
@@ -77,16 +81,16 @@ static void	ft_init_collectibles_animations(t_gs *game)
 void	ft_init_animations(t_gs *game)
 {
 	ft_init_animation(PATH_HERO_IDLE, game->textures.hero_idle,
-		&game->hero.anim.idle, game);
+		&game->hero.anim.idle, game, 4);
 	ft_init_animation(PATH_HERO_MOVE, game->textures.hero_move,
-		&game->hero.anim.move, game);
+		&game->hero.anim.move, game, 4);
 	game->hero.anim.current = &game->hero.anim.idle;
 	ft_init_animation(PATH_EXIT_C, game->textures.exit_idle,
-		&game->exit.anim.idle, game);
+		&game->exit.anim.idle, game, 4);
 	ft_init_animation(PATH_EXIT_O, game->textures.exit_idle2,
-		&game->exit.anim.idle2, game);
+		&game->exit.anim.idle2, game, 4);
 	ft_init_animation(PATH_EXIT_OP, game->textures.exit_open,
-		&game->exit.anim.change, game);
+		&game->exit.anim.change, game, 5);
 	game->exit.anim.change.next = &game->exit.anim.idle2;
 	game->exit.anim.current = &game->exit.anim.idle;
 	ft_init_enemies_animations(game);

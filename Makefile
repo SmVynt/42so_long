@@ -22,6 +22,7 @@ MLX42_LIB := $(MLX42_DIR)/libmlx42.a
 MLX42_REPO := https://github.com/codam-coding-college/MLX42.git
 
 CFLAGS = -Wall -Wextra -Werror -g -I. -I$(MLX42_DIR)/include -I/opt/homebrew/include
+SANFLAGS = -fsanitize=address -fno-omit-frame-pointer
 
 UNAME_S := $(shell uname -s)
 
@@ -109,6 +110,9 @@ fclean:
 
 re: fclean all
 
+san: fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(SANFLAGS)"
+
 bonus: all
 
 norm:
@@ -137,4 +141,4 @@ norm:
 		$(SRC)utils_map.c \
 		$(SRC)so_long.h
 
-.PHONY: all clean fclean re bonus norm
+.PHONY: all clean fclean re san bonus norm

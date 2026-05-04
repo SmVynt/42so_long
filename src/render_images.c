@@ -71,7 +71,7 @@ void	ft_override_images(t_texture *dst, t_texture *src, t_vec v, int f)
 
 void	ft_cover_pixel(char *dst, char *src)
 {
-	if (src[0] != 0)
+	if ((unsigned char)src[3] != 0)
 	{
 		dst[0] = src[0];
 		dst[1] = src[1];

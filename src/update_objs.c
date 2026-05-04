@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_update_objs(t_gs *game)
+void	ft_update_objs(t_gs *game, double dt)
 {
 	int			i;
 	t_collect	*col;
@@ -35,13 +35,13 @@ void	ft_update_objs(t_gs *game)
 			}
 		}
 		ft_next_frame_to_img(&game->img.decor, &col->anim,
-			mk_vec(col->x, col->y - 4), 0);
+			mk_vec(col->x, col->y - 4), 0, dt);
 	}
 	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
-		mk_vec(game->exit.x, game->exit.y), 0);
+		mk_vec(game->exit.x, game->exit.y), 0, dt);
 }
 
-void	ft_update_exit(t_gs *game)
+void	ft_update_exit(t_gs *game, double dt)
 {
 	t_exit	*exit;
 
@@ -53,7 +53,7 @@ void	ft_update_exit(t_gs *game)
 		game->state = STATE_WON;
 	}
 	ft_next_frame_to_img_cover(&game->img.decor, &game->exit.anim,
-		mk_vec(game->exit.x, game->exit.y), 0);
+		mk_vec(game->exit.x, game->exit.y), 0, dt);
 }
 
 void	ft_update_end(t_gs *game)

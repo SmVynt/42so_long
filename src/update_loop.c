@@ -11,13 +11,27 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <math.h>
 #include <string.h>
 
-static void	ft_update_state(t_gs *game)
+static double	ft_clamp_dt(t_gs *game)
 {
+	double	dt;
+
+	dt = game->mlx->delta_time;
+	if (dt <= 0.0 || dt > 0.1)
+		dt = 1.0 / ANIM_REF_FPS;
+	return (dt);
+}
+
+static void	ft_update_state(t_gs *game, double dt)
+{
+	float	alpha;
+
 	if (game->state == STATE_HERO || game->state == STATE_ENEMIES)
 	{
-		game->turn = ft_lerp(game->turn, 1.0f, GAME_LERP);
+		alpha = 1.0f - powf(1.0f - GAME_LERP, (float)(dt * ANIM_REF_FPS));
+		game->turn = ft_lerp(game->turn, 1.0f, alpha);
 		if (game->turn >= 0.99f)
 		{
 			game->turn = 1.0f;
@@ -39,15 +53,17 @@ void	ft_update(void *param)
 {
 	t_gs	*game;
 	size_t	n;
+	double	dt;
 
 	game = (t_gs *)param;
 	if (game->state == STATE_FINAL)
 		return ;
-	ft_update_state(game);
-	ft_update_objs(game);
-	ft_update_exit(game);
-	ft_update_enemies(game);
-	ft_update_hero(game);
+	dt = ft_clamp_dt(game);
+	ft_update_state(game, dt);
+	ft_update_objs(game, dt);
+	ft_update_exit(game, dt);
+	ft_update_enemies(game, dt);
+	ft_update_hero(game, dt);
 	ft_update_end(game);
 	ft_override_images(&game->img.render_sm, &game->img.bg, mk_vec(0, 0), 0);
 	ft_cover_images(&game->img.render_sm, &game->img.decor, mk_vec(0, 0), 0);

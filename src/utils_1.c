@@ -14,18 +14,31 @@
 
 static void	ft_clean(t_gs *game)
 {
-	if (game->mlx)
+	mlx_t	*mlx;
+
+	mlx = game->mlx;
+	if (mlx)
 	{
 		if (game->screen)
-			mlx_delete_image(game->mlx, game->screen);
+			mlx_delete_image(mlx, game->screen);
 		game->screen = NULL;
-		mlx_terminate(game->mlx);
+	}
+	ft_destroy_game_textures(game);
+	if (mlx)
+	{
+		mlx_terminate(mlx);
 		game->mlx = NULL;
 	}
 	if (game->enemies)
+	{
 		free(game->enemies);
+		game->enemies = NULL;
+	}
 	if (game->collects)
+	{
 		free(game->collects);
+		game->collects = NULL;
+	}
 	ft_free_map(&game->map);
 	ft_printf(COLOR_B "Exiting\n" COLOR_X);
 	ft_printf("\n");

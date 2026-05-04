@@ -59,13 +59,23 @@ t_map	*ft_copy_map(t_map *src)
 		return (NULL);
 	dst->tile = malloc(sizeof(char *) * src->w);
 	if (!dst->tile)
+	{
+		free(dst);
 		return (NULL);
+	}
 	i = -1;
 	while (++i < src->w)
 	{
 		dst->tile[i] = malloc(sizeof(char) * src->h);
 		if (!dst->tile[i])
+		{
+			j = -1;
+			while (++j < i)
+				free(dst->tile[j]);
+			free(dst->tile);
+			free(dst);
 			return (NULL);
+		}
 	}
 	i = -1;
 	while (++i < src->w)
@@ -97,11 +107,11 @@ void	ft_free_map(t_map *map)
 {
 	int	i;
 
-	if (map->tile)
-	{
-		i = -1;
-		while (++i < map->w)
-			free(map->tile[i]);
-		free(map->tile);
-	}
+	if (!map->tile)
+		return ;
+	i = -1;
+	while (++i < map->w)
+		free(map->tile[i]);
+	free(map->tile);
+	map->tile = NULL;
 }

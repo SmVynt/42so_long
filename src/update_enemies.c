@@ -80,7 +80,7 @@ static void	ft_enemy_calculation(t_gs *game, t_enemy *enemy)
 	ft_find_next_spot(game, enemy);
 }
 
-void	ft_update_enemies(t_gs *game)
+void	ft_update_enemies(t_gs *game, double dt)
 {
 	int		i;
 	t_enemy	*enemy;
@@ -97,7 +97,7 @@ void	ft_update_enemies(t_gs *game)
 		if (game->state == STATE_ENEMIES && enemy->state == STATE_MOVE)
 			ft_update_enemy_move(game, enemy);
 		ft_next_frame_to_img_cover(&game->img.en, &enemy->anim,
-			mk_vec(enemy->x, enemy->y - 6), enemy->flipped);
+			mk_vec(enemy->x, enemy->y - 6), enemy->flipped, dt);
 		i++;
 	}
 	if (game->state == STATE_CALC)
